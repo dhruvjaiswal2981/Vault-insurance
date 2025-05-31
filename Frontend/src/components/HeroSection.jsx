@@ -65,7 +65,7 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen bg-white overflow-hidden">
       {/* Background GIF for desktop */}
-      <div className="absolute right-0 top-0 hidden lg:block z-0 max-w-[1000px] xl:max-w-[1200px] 2xl:max-w-[1500px]">
+      <div className="absolute right-0 top-0 hidden lg:block z-0 max-w-[1000px] xl:max-w-[1000px] 2xl:max-w-[1100px]">
         <img
           src="/gif/Vault1.1.gif"
           alt="Vault Hero GIF"

@@ -5,7 +5,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
 const app = express();
-const PORT = 5000;
+const PORT = 4000;
 
 // Middleware
 app.use(cors());
