@@ -17,6 +17,7 @@ import BusinessInsurance from './pages/BusinessInsurance';
 
 import LoginPage from './pages/LoginPage';
 import AdminDashboard from './pages/AdminDashboard';
+import NotFound from './pages/NotFound';
 
 function MainWebsite() {
   return (
@@ -46,6 +47,7 @@ function App() {
       <Route path="/vehicle-insurance" element={<VehicleInsurance />} />
       <Route path="/business-insurance" element={<BusinessInsurance />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path='/not-found' element={<NotFound/>}/>
       <Route path="/admin" element={<LoginPage onLoginSuccess={() => setIsLoggedIn(true)} />} />
       <Route
         path="/admin/dashboard"

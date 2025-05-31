@@ -17,6 +17,10 @@ const BusinessInsurance = () => {
    navigate("/contact")
   };
 
+  const handleClick = () => {
+    navigate("/not-found")
+  };
+
   return (
     <>
     <Header/>
@@ -70,6 +74,7 @@ const BusinessInsurance = () => {
                 Get Business Quote
               </motion.button>
               <motion.button
+                onClick={handleClick}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="border-2 border-purple-600 text-purple-600 font-medium py-3 px-8 rounded-lg shadow-lg transition-all"

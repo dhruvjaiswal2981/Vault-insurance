@@ -31,9 +31,9 @@ const Footer = () => {
                 <li><a href="/vehicle-insurance" className="text-[#2d313d] hover:text-blue-600 transition-colors">Vehicle Insurance</a></li>
                 <li><a href="/health-insurance" className="text-[#2d313d] hover:text-blue-600 transition-colors">Health Insurance</a></li>
                 <li><a href="/life-insurance" className="text-[#2d313d] hover:text-blue-600 transition-colors">Life Insurance</a></li>
-                <li><a href="/" className="text-[#2d313d] hover:text-blue-600 transition-colors">Enterprise Solutions</a></li>
-                <li><a href="/" className="text-[#2d313d] hover:text-blue-600 transition-colors">Claims</a></li>
-                <li><a href="/" className="text-[#2d313d] hover:text-blue-600 transition-colors">Resources</a></li>
+                <li><a href="/not-found" className="text-[#2d313d] hover:text-blue-600 transition-colors">Enterprise Solutions</a></li>
+                <li><a href="/not-found" className="text-[#2d313d] hover:text-blue-600 transition-colors">Claims</a></li>
+                <li><a href="/not-found" className="text-[#2d313d] hover:text-blue-600 transition-colors">Resources</a></li>
               </ul>
             </div>
           </div>
@@ -42,8 +42,8 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold text-[#2d313d] mb-4">business</h3>
             <ul className="space-y-3">
-              <li><a href="/" className="text-[#2d313d] hover:text-blue-600 transition-colors">educational</a></li>
-              <li><a href="/" className="text-[#2d313d] hover:text-blue-600 transition-colors">construction</a></li>
+              <li><a href="/not-found" className="text-[#2d313d] hover:text-blue-600 transition-colors">educational</a></li>
+              <li><a href="/not-found" className="text-[#2d313d] hover:text-blue-600 transition-colors">construction</a></li>
               <li><a href="/vehicle-insurance" className="text-[#2d313d] hover:text-blue-600 transition-colors">vehicle</a></li>
               <li><a href="/business-insurance" className="text-[#2d313d] hover:text-blue-600 transition-colors">other</a></li>
             </ul>
@@ -53,7 +53,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold text-[#2d313d] mb-4">careers</h3>
             <ul className="space-y-3">
-              <li><a href="/" className="text-[#2d313d] hover:text-blue-600 transition-colors">explore careers @vault</a></li>
+              <li><a href="/not-found" className="text-[#2d313d] hover:text-blue-600 transition-colors">explore careers @vault</a></li>
             </ul>
           </div>
 

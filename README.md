@@ -96,6 +96,7 @@ src/
     │   ├── BusinessInsurance.jsx
     │   ├── HealthInsurance.jsx
     │   ├── LifeInsurance.jsx
+    │   ├── NotFound.jsx
     │   └── VehicleInsurance.jsx
     ├── App.jsx
     ├── index.jsx
