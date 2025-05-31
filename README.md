@@ -110,7 +110,7 @@ src/
 
 - Frontend Deployment
     - Live Demo: The application is hosted on Netlify.
-    - Access it here: 
+    - Access it here: https://vault-dhruv.netlify.app/
 
 ## Live Demo
 - Demo Video Link : https://drive.google.com/file/d/1go70SHkI6UgiwOmY5lhzYPDkmCw6lINx/view?usp=sharing
