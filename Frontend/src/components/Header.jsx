@@ -3,21 +3,27 @@ import { useLocation } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showClaimsInfo, setShowClaimsInfo] = useState(false);
   const location = useLocation();
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Life Insurance", path: "/life-insurance" },
-    { name: "Health Insurance", path: "/health-insurance" },
-    { name: "Vehicle Insurance", path: "/vehicle-insurance" },
-    { name: "Business Insurance", path: "/business-insurance" },
+    { name: "home", path: "/" },
+    { name: "life insurance", path: "/life-insurance" },
+    { name: "health insurance", path: "/health-insurance" },
+    { name: "vehicle insurance", path: "/vehicle-insurance" },
+    { name: "business insurance", path: "/business-insurance" },
   ];
 
   const isActive = (path) => location.pathname === path;
 
+  const handleClaimsClick = () => {
+    setShowClaimsInfo(!showClaimsInfo);
+    setMenuOpen(false); 
+  };
+
   return (
-    <header className="bg-white py-4 px-4 shadow-none sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <header className="w-full bg-white py-1 px-1   sticky top-0 z-50">
+      <div className="flex items-center w-full px-5 justify-between">
         {/* Logo */}
         <div className="flex items-center">
           <img
@@ -27,22 +33,45 @@ const Header = () => {
           />
         </div>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
+        {/* Desktop Navigation - Centered */}
+        <nav className="hidden lg:flex items-center space-x-8 ">
           {navLinks.map(({ name, path }) => (
             <a
               key={name}
               href={path}
-              className={`text-xl font-medium transition-colors ${
+              className={`text-lg font-medium transition-colors ${
                 isActive(path)
                   ? "text-blue-600 border-b-2 border-blue-600"
-                  : "text-[#22272b99] hover:text-blue-600"
+                  : "text-gray-700 hover:text-blue-600"
               } pb-1`}
             >
               {name}
             </a>
           ))}
         </nav>
+
+        {/* Desktop Buttons - Right Side */}
+        <div className="hidden md:flex items-center justify-center space-x-4">
+          <button className="text-lg font-medium text-blue-600 px-18 py-2 border border-blue-600 rounded-lg transition hover:bg-blue-50">
+            Get Free Quote
+          </button>
+          <button
+  onClick={handleClaimsClick}
+  className="w-full text-center text-lg font-medium text-white bg-[#4568C7] px-4 py-2 rounded-lg transition hover:bg-blue-700 flex items-center justify-center gap-2"
+>
+  Claims
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="h-4 w-4"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+  </svg>
+</button>
+
+        </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
@@ -66,22 +95,104 @@ const Header = () => {
 
       {/* Mobile Navigation Menu */}
       {menuOpen && (
-        <nav className="md:hidden bg-white shadow-md">
-          {navLinks.map(({ name, path }) => (
-            <a
-              key={name}
-              href={path}
-              className={`block px-4 py-3 text-lg font-medium transition-colors ${
-                isActive(path)
-                  ? "text-blue-600 bg-blue-50 border-l-4 border-blue-600"
-                  : "text-[#22272b99] hover:text-blue-600 hover:bg-blue-50"
-              }`}
-              onClick={() => setMenuOpen(false)}
+        <div className="md:hidden bg-white shadow-lg rounded-lg mt-2 mx-4">
+          <nav className="flex flex-col">
+            {navLinks.map(({ name, path }) => (
+              <a
+                key={name}
+                href={path}
+                className={`px-4 py-3 text-lg font-medium transition-colors ${
+                  isActive(path)
+                    ? "text-blue-600 bg-blue-50 border-l-4 border-blue-600"
+                    : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
+                }`}
+                onClick={() => setMenuOpen(false)}
+              >
+                {name}
+              </a>
+            ))}
+            <div className="border-t border-gray-200 px-4 py-3 flex flex-col space-y-2">
+              <button className="w-full text-center text-lg font-medium text-[#4568C7]-600 px-4 py-2 border border-[#4568C7]-600 rounded-lg transition hover:bg-blue-50">
+                Get Free Quote
+              </button>
+              <button
+                onClick={handleClaimsClick}
+                className="w-full text-center text-lg font-medium text-white bg-[#4568C7] px-4 py-2 rounded-lg transition hover:bg-blue-700"
+              >
+                Claims
+              </button>
+            </div>
+          </nav>
+        </div>
+      )}
+
+      {/* Claims Info Dropdown */}
+      {showClaimsInfo && (
+        <div className="absolute right-4 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg w-72 z-50 max-w-full">
+          {/* Close Button */}
+          <div className="flex justify-end p-2">
+            <button
+              onClick={() => setShowClaimsInfo(false)}
+              className="text-gray-500 hover:text-gray-700 transition"
+              aria-label="Close"
             >
-              {name}
-            </a>
-          ))}
-        </nav>
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Info Content */}
+          <div className="p-4 pt-0 space-y-4">
+            {/* Call Us */}
+            <div className="flex items-start space-x-3">
+              <img
+                src="/svg/call.svg"
+                alt="Call Icon"
+                className="h-5 w-5 mt-1 object-contain"
+              />
+              <div>
+                <p className="text-sm text-gray-800 font-medium">call us</p>
+                <a
+                  href="tel:+919876543210"
+                  className="text-sm text-blue-600 font-medium break-all hover:underline"
+                >
+                  +91 9876543210
+                </a>
+              </div>
+            </div>
+
+            {/* WhatsApp Us */}
+            <div className="flex items-start space-x-3">
+              <img
+                src="/svg/whatsapp.svg"
+                alt="WhatsApp Icon"
+                className="h-5 w-5 mt-1 object-contain"
+              />
+              <div>
+                <p className="text-sm text-gray-800 font-medium">whatsapp us</p>
+                <a
+                  href="https://wa.me/+919876543210"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-600 font-medium break-all hover:underline"
+                >
+                  +91 9876543210
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </header>
   );

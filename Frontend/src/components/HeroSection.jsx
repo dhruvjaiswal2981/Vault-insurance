@@ -78,7 +78,7 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Text Content */}
           <div className="text-center lg:text-left space-y-6 sm:space-y-8">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight text-[#21272b]">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight text-[#21272b] Gilroy-SemiBold">
               Safeguarding Smiles,<br />
               Securing Futures.
             </h1>

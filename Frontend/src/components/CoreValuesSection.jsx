@@ -88,9 +88,9 @@ const CoreValuesSection = () => {
       <div className="absolute bottom-[-150px] right-[-150px] w-[300px] h-[300px] bg-[#9d46e8] rounded-full opacity-10 z-0"></div>
       
       <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#22272b] mb-4 md:mb-6">Our Core Values</h2>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold text-[#22272B] mb-4 md:mb-6">Our Core Values</h2>
         <p className="text-lg md:text-xl text-[#22272bcc] mb-12 md:mb-16 max-w-3xl mx-auto leading-relaxed">
-          At Vault Insurance, we protect more than what you own — we protect what you love, what you've built, and all you hope to become.
+          At Vault Insurance, we protect more than what you own — we protect what you love, what you’ve built, and all you hope to become.
         </p>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-12 md:mb-16">
@@ -110,10 +110,10 @@ const CoreValuesSection = () => {
         </div>
         
         <Button 
-          onClick={handleGetQuote}
-          variant="primary" 
+          onClick={handleGetQuote} 
+          variant='primary'
           size="large" 
-          className="w-full sm:w-60 h-16 bg-gradient-to-r from-[#39b2ff] to-[#c465ea] hover:brightness-110"
+          className="w-full sm:w-60 h-16 hover:brightness-110"
         >
           Get a Free Quote
         </Button>
