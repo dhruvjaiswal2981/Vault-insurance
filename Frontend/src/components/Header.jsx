@@ -60,6 +60,7 @@ const Header = () => {
   className="w-full text-center text-lg font-medium text-white bg-[#4568C7] px-4 py-2 rounded-lg transition hover:bg-blue-700 flex items-center justify-center gap-2"
 >
   Claims
+  
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="h-4 w-4"
