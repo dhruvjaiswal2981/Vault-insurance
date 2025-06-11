@@ -15,6 +15,11 @@ const HeroSection = () => {
     }
   };
 
+  const handleBookCall = () => {
+    // Implement book a call functionality
+    window.open('https://calendly.com/your-link', '_blank');
+  };
+
   const Button = ({
     children,
     onClick,
@@ -63,7 +68,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative min-h-screen bg-white overflow-hidden">
+    <section className="relative bg-white overflow-hidden">
       {/* Background GIF for desktop */}
       <div className="absolute right-0 top-0 hidden lg:block z-0 max-w-[1000px] xl:max-w-[1000px] 2xl:max-w-[1100px]">
         <img
@@ -78,7 +83,7 @@ const HeroSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Text Content */}
           <div className="text-center lg:text-left space-y-6 sm:space-y-8">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight text-[#21272b] Gilroy-SemiBold">
+            <h1 className="text-4xl sm:text-5xl md:text-5xl font-semibold leading-tight text-[#21272b] Gilroy-SemiBold">
               Safeguarding Smiles,<br />
               Securing Futures.
             </h1>
@@ -88,7 +93,8 @@ const HeroSection = () => {
               futures, and everything in between 💜
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            {/* Desktop Buttons */}
+            <div className="hidden sm:flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button
                 onClick={handleGetQuote}
                 variant="primary"
@@ -109,31 +115,47 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* GIF for mobile/tablet view */}
-          <div className="block lg:hidden w-full mt-10 px-4 sm:px-6">
+          {/* GIF for mobile/tablet view - Larger size */}
+          <div className="block lg:hidden w-full mt-6 px-0">
             <img
               src="/gif/Vault1.1.gif"
               alt="Vault Hero GIF"
-              className="w-full h-auto max-h-[500px] sm:max-h-[550px] object-contain"
+              className="w-full h-auto max-h-[80vh] object-contain"
             />
+          </div>
         </div>
 
+        {/* Mobile Buttons - Centered below GIF */}
+        <div className="block sm:hidden px-4 mt-20">
+          <div className="flex flex-col gap-4 w-full max-w-md mx-auto">
+            <Button
+              onClick={handleBookCall}
+              variant="primary"
+              size="large"
+              className="w-full"
+            >
+              Book A Free Call
+            </Button>
+          </div>
         </div>
       </div>
 
-      {/* "Here is Vault for you" Section */}
-      <div className="relative z-20 text-center px-4 sm:px-6 md:px-8 py-12 sm:py-20 md:mt-40 md:mb-20 xl:mt-50">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight mb-6">
+      {/* "Here is Vault for you" Section - Desktop only */}
+      <div className="relative z-20 text-center px-4 sm:px-6 md:px-8 py-12 sm:py-20">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold leading-tight mb-6">
           <span className="text-[#22272b]">Here is </span>
-          <span className="bg-gradient-to-r from-[#5cb6ef] to-[#7aa1ff] bg-clip-text text-transparent">
-            Vault
+          <span className="inline-block align-middle mx-1">
+            <img
+              src="/images/Vault Insurance-01.png"
+              alt="Vault"
+              className="inline-block h-8 w-auto"
+            />
           </span>
           <span className="text-[#22272b]"> for you</span>
         </h2>
 
         <p className="text-lg sm:text-xl leading-relaxed text-[#22272bcc] max-w-2xl mx-auto">
-          Protect what matters most with our reliable insurance coverage. We
-          specialize in individual, business, and home insurance.
+          With 23 years of trusted expertise, we safeguard every corner of your world—bringing you true peace of mind through hassle-free offerings backed by our best-price guarantee
         </p>
       </div>
     </section>

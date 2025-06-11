@@ -108,8 +108,8 @@ const CoreValuesSection = () => {
             </div>
           ))}
         </div>
-        
-        <Button 
+        <div  className='hidden md:block'>
+          <Button 
           onClick={handleGetQuote} 
           variant='primary'
           size="large" 
@@ -117,6 +117,18 @@ const CoreValuesSection = () => {
         >
           Get a Free Quote
         </Button>
+        </div>
+        <div  className='md:hidden'>
+          <Button 
+          onClick={handleGetQuote} 
+          variant='primary'
+          size="large" 
+          className="w-full sm:w-60 h-16 hover:brightness-110"
+        >
+          Book A Free Call
+        </Button>
+        </div>
+        
       </div>
     </section>
   );

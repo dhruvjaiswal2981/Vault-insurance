@@ -22,26 +22,26 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full bg-white py-1 px-1   sticky top-0 z-50">
+    <header className="w-full bg-white py-10 px-1 sticky top-0 z-50">
       <div className="flex items-center w-full px-5 justify-between">
         {/* Logo */}
         <div className="flex items-center">
           <img
             src="/images/Vault Insurance-01.png"
             alt="Vault Insurance Logo"
-            className="h-12 w-auto"
+            className="h-8 w-auto"
           />
         </div>
 
         {/* Desktop Navigation - Centered */}
-        <nav className="hidden lg:flex items-center space-x-8 ">
+        <nav className="hidden lg:flex items-center space-x-8">
           {navLinks.map(({ name, path }) => (
             <a
               key={name}
               href={path}
-              className={`text-lg font-medium transition-colors ${
+              className={`text-1lg font-medium transition-colors ${
                 isActive(path)
-                  ? "text-blue-600 border-b-2 border-blue-600"
+                  ? "text-[#22272B] border-b-2 border-[#22272B]"
                   : "text-gray-700 hover:text-blue-600"
               } pb-1`}
             >
@@ -52,26 +52,24 @@ const Header = () => {
 
         {/* Desktop Buttons - Right Side */}
         <div className="hidden md:flex items-center justify-center space-x-4">
-          <button className="text-lg font-medium text-blue-600 px-18 py-2 border border-blue-600 rounded-lg transition hover:bg-blue-50">
+          <button className="text-lg font-medium text-blue-600 px-6 py-2 border border-blue-600 rounded-lg transition hover:bg-blue-50 whitespace-nowrap">
             Get Free Quote
           </button>
           <button
-  onClick={handleClaimsClick}
-  className="w-full text-center text-lg font-medium text-white bg-[#4568C7] px-4 py-2 rounded-lg transition hover:bg-blue-700 flex items-center justify-center gap-2"
->
-  Claims
-  
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-4 w-4"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-  </svg>
-</button>
-
+            onClick={handleClaimsClick}
+            className="text-lg font-medium text-white bg-[#4568C7] px-6 py-2 rounded-lg transition hover:bg-blue-700 flex items-center justify-center gap-2"
+          >
+            Claims
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -113,7 +111,7 @@ const Header = () => {
               </a>
             ))}
             <div className="border-t border-gray-200 px-4 py-3 flex flex-col space-y-2">
-              <button className="w-full text-center text-lg font-medium text-[#4568C7]-600 px-4 py-2 border border-[#4568C7]-600 rounded-lg transition hover:bg-blue-50">
+              <button className="w-full text-center text-lg font-medium text-[#4568C7] px-4 py-2 border border-[#4568C7] rounded-lg transition hover:bg-blue-50">
                 Get Free Quote
               </button>
               <button

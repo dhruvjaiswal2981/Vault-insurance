@@ -99,7 +99,7 @@ const Contact = () => {
       
       {/* Left Side - Form */}
       <div className="z-10">
-        <h2 className="text-5xl font-semibold text-[#22272b] mb-10">Contact us</h2>
+        <h2 className="text-4xl font-semibold text-[#22272b] mb-10">Contact us</h2>
         <form onSubmit={handleSubmit} className="space-y-8">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

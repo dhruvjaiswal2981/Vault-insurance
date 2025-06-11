@@ -1,4 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const Statistics = () => {
 
@@ -84,105 +88,201 @@ const Statistics = () => {
     <>
       {/* Statistics Section */}
       <section className="py-16 md:py-24 bg-gradient-to-r from-[#5bb5ee] to-[#7aa1ff] rounded-[30px] mx-4 md:mx-5 my-8 md:my-10 relative overflow-hidden">
-        <div className="relative z-10 max-w-7xl mx-auto px-6">
+        <div className="relative z-10">
           {/* Statistics Grid */}
-          <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-12 md:mb-16">
-      <div className="text-center p-4">
-        <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4">
-          {animatedStats.years}+
-        </div>
-        <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
-          Years of Experience
-        </div>
-      </div>
-      <div className="text-center p-4">
-        <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl l font-bold text-white mb-2 md:mb-4">
-          {animatedStats.clients}+
-        </div>
-        <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
-          Clients Served
-        </div>
-      </div>
-      <div className="text-center p-4">
-        <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4">
-          ₹{animatedStats.claims} Cr+
-        </div>
-        <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
-          in Claims Paid
-        </div>
-      </div>
-      <div className="text-center p-4">
-        <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl  font-bold text-white mb-2 md:mb-4">
-          {animatedStats.awards}+
-        </div>
-        <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
-          Industry Awards
-        </div>
-      </div>
+      <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-12 md:mb-16">
+  <div className="text-center p-4">
+    <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4">
+      {animatedStats.years}+
     </div>
-          
-          {/* Insurance Partners */}
-<div className="w-full px-4 md:px-6 lg:px-0 mb-12 md:mb-20 mt-12 md:mt-30">
-  <div className="bg-white rounded-[20px] md:rounded-[30px] p-4 sm:p-6 md:p-12 relative max-w-[1400px] mx-auto">
+    <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
+      Years of Experience
+    </div>
+  </div>
+  <div className="text-center p-4">
+    <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4">
+      {animatedStats.clients}+
+    </div>
+    <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
+      Clients Served
+    </div>
+  </div>
+  <div className="text-center p-4">
+    <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4">
+      ₹{animatedStats.claims} Cr+
+    </div>
+    <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
+      in Claims Paid
+    </div>
+  </div>
+  <div className="text-center p-4">
+    <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4">
+      {animatedStats.awards}+
+    </div>
+    <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
+      Industry Awards
+    </div>
+  </div>
+</div>
+
+         
+
+{/* Insurance Partners */}
+<div className="w-full px-4 md:px-6 lg:px-0 mb-12 md:mb-20 mt-12 ml-6 md:mt-30">
+  <div className="bg-white rounded-l-[20px] md:rounded-l-[30px] p-4 sm:p-6 md:p-20 relative">
+
     <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#22272b] mb-6 sm:mb-8 md:mb-12 text-center md:text-left">
       Our Insurance Partners
     </h2>
 
-    <div className="flex flex-wrap justify-center md:justify-between items-center gap-3 sm:gap-4 md:gap-6 overflow-x-auto py-4">
-      <img src="/images/hdfc-logo.png" alt="HDFC Life" className="h-10 sm:h-12 md:h-16 w-auto" />
-      <img src="/images/birla-logo.png" alt="Birla Sun Life" className="h-10 sm:h-12 md:h-16 w-auto" />
-      <img src="/images/sbi-logo.png" alt="SBI Life" className="h-10 sm:h-12 md:h-16 w-auto" />
-      <img src="/images/axis-logo.png" alt="AXIS Bank" className="h-10 sm:h-12 md:h-16 w-auto" />
-      <img src="/images/lic-logo.png" alt="LIC" className="h-10 sm:h-12 md:h-16 w-auto" />
-      <img src="/images/icici-logo.png" alt="ICICI Prudential" className="h-10 sm:h-12 md:h-16 w-auto" />
+    {/* Mobile Swiper: 2 rows */}
+    <div className="block md:hidden">
+      <Swiper
+        modules={[Autoplay]}
+        loop={true}
+        autoplay={{
+          delay: 1500,
+          disableOnInteraction: false,
+        }}
+        slidesPerView={3}
+        spaceBetween={20}
+      >
+        {[
+          "/images/hdfc-logo.png",
+          "/images/birla-logo.png",
+          "/images/sbi-logo.png",
+          "/images/axis-logo.png",
+          "/images/lic-logo.png",
+          "/images/icici-logo.png",
+        ].map((src, index) => (
+          <SwiperSlide key={index}>
+            <div className="grid grid-cols-1">
+              <img src={src} alt="Insurance Partner" className="h-12 w-auto mx-auto mb-4" />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      <Swiper
+        modules={[Autoplay]}
+        loop={true}
+        autoplay={{
+          delay: 1500,
+          disableOnInteraction: false,
+        }}
+        slidesPerView={3}
+        spaceBetween={20}
+      >
+        {[
+          "/images/axis-logo.png",
+          "/images/hdfc-logo.png",
+          "/images/birla-logo.png",
+          "/images/lic-logo.png",
+          "/images/sbi-logo.png",
+          "/images/icici-logo.png",
+        ].map((src, index) => (
+          <SwiperSlide key={index}>
+            <div className="grid grid-cols-1">
+              <img src={src} alt="Insurance Partner" className="h-12 w-auto mx-auto mb-4" />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
 
-    {/* Gradient mask (desktop only) */}
-    <div className="absolute right-0 top-0 h-full w-1/4 bg-gradient-to-l from-white to-transparent hidden md:block"></div>
+    {/* Desktop Swiper: single row */}
+    <div className="hidden md:block">
+      <Swiper
+        modules={[Autoplay]}
+        spaceBetween={30}
+        loop={true}
+        autoplay={{
+          delay: 1500,
+          disableOnInteraction: false,
+        }}
+        breakpoints={{
+          640: { slidesPerView: 2 },
+          768: { slidesPerView: 3 },
+          1024: { slidesPerView: 4 },
+          1280: { slidesPerView: 5 },
+        }}
+      >
+        {[
+          { src: "/images/hdfc-logo.png", alt: "HDFC Life" },
+          { src: "/images/birla-logo.png", alt: "Birla Sun Life" },
+          { src: "/images/sbi-logo.png", alt: "SBI Life" },
+          { src: "/images/axis-logo.png", alt: "AXIS Bank" },
+          { src: "/images/lic-logo.png", alt: "LIC" },
+          { src: "/images/icici-logo.png", alt: "ICICI Prudential" },
+        ].map((partner, index) => (
+          <SwiperSlide key={index}>
+            <img
+              src={partner.src}
+              alt={partner.alt}
+              className="h-16 w-auto mx-auto"
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
 
-    {/* Background Illustration (desktop only) */}
-    <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block -scale-x-100">
-      <img 
-        src="/images/search-img.png" 
-        alt="Statistics Illustration" 
-        className="w-auto h-[250px] sm:h-[300px] lg:h-[450px] md:ml-15" 
+    {/* Right side image (only for desktop) */}
+    <div className="absolute z-10 right-0 top-1/2 -translate-y-1/2 lg:block -scale-x-100">
+      <img
+        src="/images/search-img.png"
+        alt="Statistics Illustration"
+        className="w-auto h-[250px] sm:h-[300px] lg:h-[450px] md:ml-15"
       />
     </div>
   </div>
 </div>
 
+
           
   {/* Testimonials Section */}
     <div className="mt-12 md:mt-30 px-4">
-      <h2 className="text-3xl md:text-4xl lg:text-[42px] font-bold text-white mb-4 text-left">Stories from Our Vaulters</h2>
+      <h2 className="text-3xl md:text-4xl lg:text-[42px] font-bold text-white mb-4 text-left">
+        Stories from Our Vaulters
+      </h2>
       <p className="text-lg md:text-xl text-white/90 mb-10 md:mb-12 text-left">
         Join 1000s of Happy Souls Who Have Trusted Vault — Become a Vaulter Today!
       </p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
-        {testimonials.map((testimonial) => (
-          <div key={testimonial.id} className="bg-white rounded-[24px] p-8">
-            <p className="text-xl md:text-2xl font-bold text-[#4788dc] mb-8 leading-relaxed">
-              "{testimonial.quote}"
-            </p>
-            <div className="flex items-center space-x-4">
-              <img 
-                src={testimonial.image} 
-                alt={testimonial.name}
-                className="w-16 h-16 rounded-full object-cover"
-              />
-              <span className="text-lg font-semibold text-[#596069]">{testimonial.name}</span>
-            </div>
-          </div>
-          ))}
-        </div>
 
-        {/* Pagination dots - centered with exact spacing */}
-        <div className="flex justify-center space-x-3">
-          <div className="w-3 h-3 bg-white rounded-full"></div>
-          <div className="w-3 h-3 bg-white/30 rounded-full"></div>
-          <div className="w-3 h-3 bg-white/30 rounded-full"></div>
-        </div>
+      <Swiper
+        modules={[Autoplay, Pagination]}
+        spaceBetween={30}
+        loop={true}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
+        pagination={{ clickable: true }}
+        breakpoints={{
+          640: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
+        className="mb-10"
+      >
+        {testimonials.map((testimonial) => (
+          <SwiperSlide key={testimonial.id}>
+            <div className="bg-white rounded-[24px] p-8 h-full shadow-md">
+              <p className="text-xl md:text-2xl font-bold text-[#4788dc] mb-8 leading-relaxed">
+                “{testimonial.quote}”
+              </p>
+              <div className="flex items-center space-x-4">
+                <img
+                  src={testimonial.image}
+                  alt={testimonial.name}
+                  className="w-14 h-14 rounded-full object-cover"
+                />
+                <span className="text-base md:text-lg font-semibold text-[#596069]">
+                  {testimonial.name}
+                </span>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
       </div>
         </div>
       </section>
@@ -206,3 +306,4 @@ const Statistics = () => {
 };
 
 export default Statistics;
+

@@ -88,7 +88,7 @@ const InsuranceSections = () => {
   return (
     <>
       {/* Individual / Retail Section */}
-      <section className="relative py-20 bg-gradient-to-br from-[#24bcede5] to-[#46b7ffe5] rounded-[30px] mx-5 mb-5 overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-[#24bcede5] to-[#46b7ffe5] rounded-[30px] mx-5 mb-5 overflow-hidden hidden md:block">
         {/* Right-side image */}
         <div className="absolute right-0 top-0 h-full w-2/3 hidden md:block">
           <img 
@@ -137,7 +137,7 @@ const InsuranceSections = () => {
       </section>
 
       {/* Business Section */}
-      <section className="relative py-20 bg-gradient-to-br from-[#9d6fffe5] to-[#618fffe5] rounded-[30px] mx-5 mt-5 mb-10 overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-[#9d6fffe5] to-[#618fffe5] rounded-[30px] mx-5 mt-5 mb-10 overflow-hidden hidden md:block">
         {/* Right-side image */}
         <div className="absolute right-0 top-0 h-full w-2/3 hidden md:block">
           <img 
