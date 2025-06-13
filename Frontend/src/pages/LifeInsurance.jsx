@@ -7,6 +7,7 @@ const LifeInsurance = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [policyType, setPolicyType] = useState("new");
+   const [vehicleNumber, setVehicleNumber] = useState("");
 
   const navLinks = [
     { name: "home", path: "/" },
@@ -18,11 +19,17 @@ const LifeInsurance = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Policy Type:", policyType);
+    console.log("Vehicle Number:", vehicleNumber);
+    // Add your form submission logic here
+  };
 
   return (
     <>
       <header className="w-full sticky z-50 bg-[linear-gradient(250deg,#24BDED_0%,#47B7FF_100%)]">
-      <div className="flex items-center w-full px-8 justify-between py-12">
+      <div className="flex items-center w-full px-8 justify-between py-5">
         {/* Logo */}
         <div className="flex items-center">
           <img
@@ -91,54 +98,94 @@ const LifeInsurance = () => {
         </div>
       )}
     </header>
+  {/* Hero Section start*/}
 
-    {/* Hero Section */}
-
-    <section className="w-full py-12 px-4 md:px-12 lg:px-24 bg-[linear-gradient(250deg,#24BDED_0%,#47B7FF_100%)]">
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-between">
-
-        {/* Left - Form Section */}
-        <form  className="bg-white rounded-3xl shadow-lg w-[780px] h-[550px] p-8 lg:p-10 lg:pr-50 relative">
-          <h2 className="text-3xl font-bold text-[#222] mb-2 pt-10">Life Insurance</h2>
-          <p className="text-gray-600 mb-6">Compare & Buy Best Fit Health Insurance</p>
-
-          {/* Policy Type */}
-          <div className="flex gap-6 mb-6">
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="policy"
-                value="new"
-                checked={policyType === "new"}
-                onChange={() => setPolicyType("new")}
-                className="accent-blue-500"
-              />
-              <span className="text-[#111] font-medium">New Vehicle</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="policy"
-                value="renew"
-                checked={policyType === "renew"}
-                onChange={() => setPolicyType("renew")}
-                className="accent-blue-500"
-              />
-              <span className="text-[#111] font-medium">Old Vehicle</span>
-            </label>
-          </div>
-        </form>
-
-        {/* Right - Image */}
-        <div className="flex justify-center items-center absolute md:pl-180 md:pt-45 p-8">
-          <img
-            src="/images/life-insurance-illustration.png"
-            alt="life-insaurance"
-            className="w-auto h-auto"
-          />
-        </div>
+    <section className="relative w-full py-12 px-4 md:px-12 lg:px-24
+                 bg-[linear-gradient(250deg,#24BDED_0%,#47B7FF_100%)]
+                 overflow-hidden
+                  flex flex-col justify-center">
+      {/*Desktop View Only */}
+      <div
+        className="hidden md:block relative w-full h-auto mb-3 mx-0 z-20
+                     lg:top-[90px] lg:left-[600px]"
+      >
+        <img
+          src="/images/life-insurance-illustration.png"
+          alt="life-insurance"
+          className="object-contain w-full lg:w-[600px] lg:h-[550px]"
+          
+        />
       </div>
+        <img
+          src="/images/life-insurance-illustration.png"
+          alt="life-insurance"
+          className="object-contain w-full h-full mx-15 my-10 md:hidden"
+          
+        />
+      <form
+        onSubmit={handleSubmit}
+        className="relative  max-w-[780px] h-auto p-8 md:p-12 mx-auto
+                   bg-white rounded-[30px] shadow-2xl z-10
+                   flex flex-col justify-start items-start
+                   lg:absolute lg:w-[700px] lg:h-[540px] lg:top-[50px] lg:left-[60px]"
+      >
+        <h2 className="text-[28px] md:text-[46px] font-semibold text-[#222] mb-1">Life Insurance</h2>
+        <p className="text-[14px] md:text-[16px] text-[#22272BCC] mb-8">Compare & Buy Best Fit Life Insurance</p>
+
+        {/* Policy Type */}
+        <div className="flex flex-row gap-4 sm:gap-8 mb-12">
+          <label className="flex items-center space-x-2 cursor-pointer">
+            <input
+              type="radio"
+              name="policy"
+              value="new"
+              checked={policyType === "new"}
+              onChange={() => setPolicyType("new")}
+              className="accent-[#6290FF] w-5 h-5"
+            />
+            <span className="text-[#22272B] text-[12px] font-medium">New Vehicle</span>
+          </label>
+          <label className="flex items-center space-x-2 cursor-pointer">
+            <input
+              type="radio"
+              name="policy"
+              value="renew"
+              checked={policyType === "renew"}
+              onChange={() => setPolicyType("renew")}
+              className="accent-[#6290FF] w-5 h-5"
+            />
+            <span className="text-[#22272B] text-[12px] font-medium">Old Vehicle</span>
+          </label>
+        </div>
+
+        {/* Vehicle Number Input */}
+        <div className="flex  flex-row items-center w-full  max-w-[340px] rounded-xl shadow-md overflow-hidden border border-gray-100 mb-8">
+          <input
+            type="text"
+            placeholder="Enter Vehicle Number"
+            value={vehicleNumber}
+            onChange={(e) => setVehicleNumber(e.target.value)}
+            className="flex-grow py-2 px-4 text-gray-700 text-lg focus:outline-none border-none bg-white w-full sm:w-auto"
+          />
+          <button
+            type="submit"
+            className="bg-[#62B3F0] text-white font-semibold py-2 px-4 m-2 max-w-[80px] text-[15px] rounded-[5px] hover:bg-blue-600 transition-colors duration-200 cursor-pointer w-full sm:w-auto"
+          >
+            Search
+          </button>
+        </div>
+
+        {/* "Brand New Vehicle?" link */}
+        <p className="text-[#273640] font-semibold text-[14px] mt-4">
+          Brand New Vehicle?{' '}
+          <a href="#" className="text-[#3099D0] hover:underline cursor-pointer font-medium">
+            Click Here
+          </a>
+        </p>
+      </form>
     </section>
+
+    {/* Hero Section end*/}
 
     {/* Type Life Section*/}  
     <div className="bg-gray-50 px-4 py-4 flex justify-center items-center"> 
@@ -148,44 +195,55 @@ const LifeInsurance = () => {
                    flex flex-col items-center justify-center text-center"
       >
         <div className="mb-16 px-4 max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#202B32] mb-10">
+          <h2 className="text-3xl md:text-4xl font-semibold text-[#202B32] mb-10">
             Understand the Types of Life Insurance
           </h2>
-          <p className="text-[#202B3299] text-[14px] md:text-[20px] leading-relaxed">
-            Depending on your specific financial need you need to choose the right type of life insurance. Let’s map some of the common financial needs with suitable life insurance:
+          <p className="text-[#202B3299] text-[14px] md:text-[15px] leading-relaxed font-semibold">
+            Depending on your specific financial need you need to choose the right type of life 
+            <br/>insurance. Let’s map some of the common financial needs with suitable life insurance:
           </p>
         </div>
 
         {/* Cards Container1 */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[60px] mb-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-[30px] md:gap-[100px] mb-2 md:mb-8">
 
           <div className="flex flex-col items-center max-w-sm">
-            <h3 className="md:text-[28px] text-[20px] text-[#202B32] font-semibold">
-              Term insurance is for financial protection of your dependents
+            <h3 className="md:text-[20px] text-[16px] text-[#202B32] font-semibold">
+              Term insurance is for 
+              <br/>financial protection of 
+              <br/>your dependents
             </h3>
           </div>
           <div className="flex flex-col items-center max-w-sm">
-             <h3 className="md:text-[28px] text-[20px] text-[#202B32] font-semibold">
-             Child Plan gives you the opportunity to invest and secure your child’s financial future
+             <h3 className="md:text-[20px] text-[16px] text-[#202B32] font-semibold">
+             Child Plan gives you the 
+             <br/>opportunity to invest and secure 
+             <br/>your child’s financial future
             </h3>
           </div>
           <div className="flex flex-col items-center max-w-sm">
-            <h3 className="md:text-[28px] text-[20px] text-[#202B32] font-semibold">
-              Retirement & pension plan helps you save for your retirement
+            <h3 className="md:text-[20px] text-[16px] text-[#202B32] font-semibold">
+              Retirement & pension 
+              <br/>plan helps you save 
+              <br/>for your retirement
             </h3>
           </div>
         </div>
 
         {/* Cards Container2 */}
-        <div className="hidden md:grid grid-cols-2 md:grid-cols-2 gap-[60px] mb-8">
+        <div className="hidden md:grid grid-cols-2 md:grid-cols-2 gap-[60px] mt-10">
           <div className="flex flex-col items-center max-w-sm">
-            <h3 className="md:text-[28px] text-[20px] text-[#202B32] font-semibold">
-              ULIP gives you the opportunity to grow your wealth by investing in the markets along with a life cover
+            <h3 className="md:text-[20px] text-[16px] text-[#202B32] font-semibold">
+              ULIP gives you the opportunity to 
+              <br/>grow your wealth by investing in 
+              <br/>the markets along with a life cover
             </h3>
           </div>
           <div className="flex flex-col items-center max-w-sm">
-            <h3 className="md:text-[28px] text-[20px] text-[#202B32] font-semibold">
-              Endowment plan offers you 100% guaranteed15 returns on your investment along with a life cover
+            <h3 className="md:text-[20px] text-[16px] text-[#202B32] font-semibold">
+              Endowment plan offers you 100% 
+              <br/>guaranteed15 returns on your 
+              <br/>investment along with a life cover
             </h3>
           </div>
         </div>

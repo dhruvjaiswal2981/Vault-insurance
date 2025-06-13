@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { submitContactForm } from '../api/contactApi';
 
  const Button = ({
     children,
@@ -64,36 +64,32 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const res = await fetch('http://localhost:5000/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    });
+    try {
+      const res = await submitContactForm(formData);
 
-    if (res.ok) {
-      alert('Message sent successfully!');
-      setFormData({
-        firstName: '',
-        lastName: '',
-        phone: '',
-        helpWith: '',
-        message: '',
-      });
-    } else {
-      alert('Failed to send message.');
+      if (res.success) {
+        alert('Message sent successfully!');
+        window.location.reload();
+        setFormData({
+          firstName: '',
+          lastName: '',
+          phone: '',
+          helpWith: '',
+          message: ''
+        });
+      } else {
+        alert('Failed to send message.');
+      }
+    } catch (error) {
+      alert('Something went wrong!');
     }
-  } catch (error) {
-    console.error('Submit error:', error);
-    alert('Something went wrong!');
-  }
-};
+  };
 
 
   return (
-  <section id="contact-form" className="bg-[#f4f8fb] py-20">
+  <section id="contact-form" className="bg-[#f4f8fb] py-20 rounded-[30px] m-5">
   <div className="max-w-7xl mx-auto px-6">
     <div className="grid md:grid-cols-2 gap-10 relative bg-[#f4f8fb] rounded-[30px]">
       
@@ -104,7 +100,7 @@ const Contact = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-lg text-[#596069] mb-2">First name*</label>
+              <label className="block text-[15px] text-[#596069] mb-2">first name*</label>
               <input
                 type="text"
                 name="firstName"
@@ -115,7 +111,7 @@ const Contact = () => {
               />
             </div>
             <div>
-              <label className="block text-lg text-[#596069] mb-2">Last name*</label>
+              <label className="block text-[15px] text-[#596069] mb-2">last name*</label>
               <input
                 type="text"
                 name="lastName"
@@ -129,7 +125,7 @@ const Contact = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-lg text-[#596069] mb-2">Phone*</label>
+              <label className="block text-[15px] text-[#596069] mb-2">phone*</label>
               <input
                 type="tel"
                 name="phone"
@@ -140,7 +136,7 @@ const Contact = () => {
               />
             </div>
             <div>
-              <label className="block text-lg text-[#596069] mb-2">How can we help you?*</label>
+              <label className="block text-[15px] text-[#596069] mb-2">how can we help you?*</label>
               <input
                 type="text"
                 name="helpWith"
@@ -153,7 +149,7 @@ const Contact = () => {
           </div>
 
           <div>
-            <label className="block text-lg text-[#596069] mb-2">Message*</label>
+            <label className="block text-[15px] text-[#596069] mb-2">message*</label>
             <textarea
               name="message"
               value={formData.message}
@@ -165,7 +161,7 @@ const Contact = () => {
           </div>
 
           <div className="flex justify-end">
-            <Button type="submit" variant="primary" size="large" className="w-44 h-14 rounded-[16px] text-lg">
+            <Button type="submit" variant="primary" size="small" className="w-[180px] h-14 rounded-[16px] text-lg">
               Submit
             </Button>
           </div>
@@ -173,7 +169,7 @@ const Contact = () => {
       </div>
 
       {/* Right Side - Illustration */}
-      <div className="absolute left-140 flex justify-end md:my-19">
+      <div className="absolute left-140 flex justify-end md:my-15">
         <img
           src="/images/Waving-hand.png"
           alt="Vault Insurance Hero"

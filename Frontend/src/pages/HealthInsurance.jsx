@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import Footer from "../components/Footer";
+import { submitHealthInsuranceLead } from '../api/healthApi';
 
 const HealthInsurance = () => {
   const location = useLocation();
@@ -26,22 +27,31 @@ const HealthInsurance = () => {
 
   const isActive = (path) => location.pathname === path;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const data = {
-      policyType,
+      policy_type: policyType,
       adults,
       children,
-      existingDisease,
+      existing_disease: existingDisease,
       insurer,
-      claimStatus,
+      claim_status: claimStatus,
       tenure,
-      eldestAge,
+      eldest_age: eldestAge,
       pincode
     };
-    console.log("Form Data:", data);
-    alert("Quote generated. Check console for details.");
+
+    try {
+      const response = await submitHealthInsuranceLead(data);
+      console.log('Response:', response);
+      alert('Quote submitted successfully!');
+      window.location.reload();
+    } catch (err) {
+      alert('Failed to submit quote. Check console for errors.');
+    }
   };
+
 
   const coverageItems1 = [
     {
@@ -173,7 +183,7 @@ const HealthInsurance = () => {
   return (
     <>
       <header className="w-full sticky z-50 bg-[linear-gradient(250deg,#24BDED_0%,#47B7FF_100%)]">
-      <div className="flex items-center w-full px-8 justify-between py-12">
+      <div className="flex items-center w-full px-8 justify-between py-5">
         {/* Logo */}
         <div className="flex items-center">
           <img
@@ -246,12 +256,12 @@ const HealthInsurance = () => {
     {/* Hero Section */}
 
       <section className="w-full py-12 px-4 md:px-12 lg:px-24 bg-[linear-gradient(250deg,#24BDED_0%,#47B7FF_100%)]">
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-between">
+      <div className="flex flex-col-reverse lg:flex-row items-center justify-between relative">
 
         {/* Left - Form Section */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-lg w-auto h-full p-8 lg:p-10 lg:pr-50 relative">
-          <h2 className="text-3xl font-bold text-[#222] mb-2 pt-10">Health Insurance</h2>
-          <p className="text-gray-600 mb-6">Compare & Buy Best Fit Health Insurance</p>
+        <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-lg w-auto  p-8 lg:p-10 lg:pr-50 relative">
+          <h2 className="text-[28px] md:text-[46px] font-semibold text-[#222] mb-2">Health Insurance</h2>
+          <p className="text-[14px] md:text[16px] text-[#22272BCC] mb-6">Compare & Buy Best Fit Health Insurance</p>
 
           {/* Policy Type */}
           <div className="flex gap-6 mb-6">
@@ -264,7 +274,7 @@ const HealthInsurance = () => {
                 onChange={() => setPolicyType("new")}
                 className="accent-blue-500"
               />
-              <span className="text-[#111] font-medium">New Policy</span>
+              <span className="text-[#22272B] text-[12px] font-medium">New Policy</span>
             </label>
             <label className="flex items-center space-x-2">
               <input
@@ -275,59 +285,63 @@ const HealthInsurance = () => {
                 onChange={() => setPolicyType("renew")}
                 className="accent-blue-500"
               />
-              <span className="text-[#111] font-medium">Renew Your Policy</span>
+              <span className="text-[#22272B] text-[12px] font-medium">Renew Your Policy</span>
             </label>
           </div>
 
-          <div className="md:flex md:flex-wrap md:items-center gap-2 sm:gap-3 mb-4">
+          <div className="md:flex md:items-center gap-3 sm:gap-4  mb-4">
             {/* Adult Counter */}
-            <div className="flex justify-between items-center md:w-[240px] md:h-[60px] bg-gray-100 px-3 py-1 md:mb-0 mb-4 gap-2">
-              <img src="/svg/adult.svg" className="w-[28px] h-[28px]" alt="Adult Icon" />
-              <span className="text-sm sm:text-base">Adult</span>
-              <button
+            <div className="flex justify-between items-center md:w-[200px] md:h-[60px] bg-white shadow-[10px_10px_40px_0px_rgba(26,129,255,0.10)] px-3 py-1 md:mb-0 mb-4 gap-2">
+              <img src="/svg/adult.svg" className="w-[24x] h-[24px]" alt="Adult Icon" />
+              <span className="text-[13px] text-[#22272BCC] font-semibold">Adult</span>
+              <div className="flex">
+                <button
                 type="button"
-                className="text-lg font-bold flex items-center justify-center w-5 h-5"
+                className="text-lg font-bold flex items-center justify-center w-6 h-6 bg-[#EEE]"
                 onClick={() => setAdults(prev => Math.max(0, prev - 1))}
               >
                 <svg width="13" height="2" viewBox="0 0 13 2" fill="none" className="w-3 h-3">
                   <path d="M11.5898 0H0.589844C0.308594 0 0.0898438 0.25 0.0898438 0.5V1.5C0.0898438 1.78125 0.308594 2 0.589844 2H11.5898C11.8398 2 12.0898 1.78125 12.0898 1.5V0.5C12.0898 0.25 11.8398 0 11.5898 0Z" fill="#22272B" fillOpacity="0.6" />
                 </svg>
               </button>
-              <span className="mx-1 sm:mx-2 text-sm sm:text-base">{adults}</span>
+              <span className="mx-2 text-[15px] text-[#22272BCC] font-semibold">{adults}</span>
               <button
                 type="button"
-                className="text-lg font-bold flex items-center justify-center w-5 h-5"
+                className="text-lg font-bold flex items-center justify-center w-6 h-6 bg-[#EEE]"
                 onClick={() => setAdults(prev => prev + 1)}
               >
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" className="w-3 h-3">
                   <path d="M11.5898 5H7.08984V0.5C7.08984 0.25 6.83984 0 6.58984 0H5.58984C5.30859 0 5.08984 0.25 5.08984 0.5V5H0.589844C0.308594 5 0.0898438 5.25 0.0898438 5.5V6.5C0.0898438 6.78125 0.308594 7 0.589844 7H5.08984V11.5C5.08984 11.7812 5.30859 12 5.58984 12H6.58984C6.83984 12 7.08984 11.7812 7.08984 11.5V7H11.5898C11.8398 7 12.0898 6.78125 12.0898 6.5V5.5C12.0898 5.25 11.8398 5 11.5898 5Z" fill="#22272B" fillOpacity="0.6" />
                 </svg>
               </button>
+              </div>
             </div>
 
             {/* Children Counter */}
-            <div className="flex justify-between bg-gray-100 items-center md:w-[240px] md:h-[60px] px-3 py-1 gap-2">
-              <img src="/svg/child.svg" alt="Child Icon" />
-              <span className="text-sm sm:text-base">Children</span>
-              <button
+            <div className="flex justify-between bg-white shadow-[10px_10px_40px_0px_rgba(26,129,255,0.10)] items-center md:w-[200px] md:h-[60px] px-3 py-1 gap-2">
+              <img src="/svg/child.svg" className="w-[24x] h-[24px]" alt="Child Icon" />
+              <span className="text-[13px] text-[#22272BCC] font-semibold">Child</span>
+              <div className="flex">
+                <button
                 type="button"
-                className="text-lg font-bold flex items-center justify-center w-5 h-5"
+                className="text-lg font-bold flex items-center justify-center w-6 h-6 bg-[#EEE]"
                 onClick={() => setChildren(prev => Math.max(0, prev - 1))}
               >
                 <svg width="13" height="2" viewBox="0 0 13 2" fill="none" className="w-3 h-3">
                   <path d="M11.5898 0H0.589844C0.308594 0 0.0898438 0.25 0.0898438 0.5V1.5C0.0898438 1.78125 0.308594 2 0.589844 2H11.5898C11.8398 2 12.0898 1.78125 12.0898 1.5V0.5C12.0898 0.25 11.8398 0 11.5898 0Z" fill="#22272B" fillOpacity="0.6" />
                 </svg>
               </button>
-              <span className="mx-1 sm:mx-2 text-sm sm:text-base">{children}</span>
+              <span className="mx-2 text-[15px] text-[#22272BCC] font-semibold">{children}</span>
               <button
                 type="button"
-                className="text-lg font-bold flex items-center justify-center w-5 h-5"
+                className="text-lg font-bold flex items-center justify-center w-6 h-6 bg-[#EEE]"
                 onClick={() => setChildren(prev => prev + 1)}
               >
                 <svg width="13" height="12" viewBox="0 0 13 12" fill="none" className="w-3 h-3">
                   <path d="M11.5898 5H7.08984V0.5C7.08984 0.25 6.83984 0 6.58984 0H5.58984C5.30859 0 5.08984 0.25 5.08984 0.5V5H0.589844C0.308594 5 0.0898438 5.25 0.0898438 5.5V6.5C0.0898438 6.78125 0.308594 7 0.589844 7H5.08984V11.5C5.08984 11.7812 5.30859 12 5.58984 12H6.58984C6.83984 12 7.08984 11.7812 7.08984 11.5V7H11.5898C11.8398 7 12.0898 6.78125 12.0898 6.5V5.5C12.0898 5.25 11.8398 5 11.5898 5Z" fill="#22272B" fillOpacity="0.6" />
                 </svg>
               </button>
+              </div>
             </div>
           </div>
 
@@ -335,7 +349,7 @@ const HealthInsurance = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 mb-4">
             <div className="relative">
               <select
-                className="w-full bg-gray-100 p-2 sm:p-3 text-[#22272BCC]-500 text-sm sm:text-base appearance-none pr-8"
+                className="w-full bg-white shadow-[10px_10px_40px_0px_rgba(26,129,255,0.10)] p-2 sm:p-3 text-[13px] font-semibold text-[#22272BCC] appearance-none pr-8 md:text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
                 value={existingDisease}
                 onChange={(e) => setExistingDisease(e.target.value)}
               >
@@ -353,7 +367,7 @@ const HealthInsurance = () => {
 
             <div className="relative">
               <select
-                className="w-full bg-gray-100 p-2 sm:p-3 text-[#22272BCC]-500 text-sm sm:text-base appearance-none pr-8"
+                className="w-full bg-white shadow-[10px_10px_40px_0px_rgba(26,129,255,0.10)] p-2 sm:p-3 text-[13px] font-semibold text-[#22272BCC] appearance-none pr-8 md:text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
                 value={insurer}
                 onChange={(e) => setInsurer(e.target.value)}
               >
@@ -370,7 +384,7 @@ const HealthInsurance = () => {
 
             <div className="relative">
               <select
-                className="w-full bg-gray-100 p-2 sm:p-3 text-[#22272BCC]-500 text-sm sm:text-base appearance-none pr-8"
+                className="w-full bg-white shadow-[10px_10px_40px_0px_rgba(26,129,255,0.10)] p-2 sm:p-3 text-[13px] font-semibold text-[#22272BCC] appearance-none pr-8 md:text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
                 value={claimStatus}
                 onChange={(e) => setClaimStatus(e.target.value)}
               >
@@ -386,7 +400,7 @@ const HealthInsurance = () => {
 
             <div className="relative">
               <select
-                className="w-full bg-gray-100 p-2 sm:p-3 text-[#22272BCC]-500 text-sm sm:text-base appearance-none pr-8"
+                className="w-full bg-white shadow-[10px_10px_40px_0px_rgba(26,129,255,0.10)] p-2 sm:p-3 text-[13px] font-semibold text-[#22272BCC] appearance-none pr-8 md:text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
                 value={tenure}
                 onChange={(e) => setTenure(e.target.value)}
               >
@@ -404,7 +418,7 @@ const HealthInsurance = () => {
             <input
               type="number" 
               placeholder="Eldest Member Age"
-              className="bg-gray-100 p-2 sm:p-3 text-gray-700 text-sm sm:text-base"
+              className="bg-white shadow-[10px_10px_40px_0px_rgba(26,129,255,0.10)] p-2 sm:p-3 text-gray-700 text-[13px] font-semibold md:text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
               value={eldestAge}
               onChange={(e) => setEldestAge(e.target.value)}
             />
@@ -412,7 +426,7 @@ const HealthInsurance = () => {
             <input
               type="text"
               placeholder="Pincode"
-              className="bg-gray-100 p-2 sm:p-3 text-gray-700 text-sm sm:text-base"
+              className="bg-white shadow-[10px_10px_40px_0px_rgba(26,129,255,0.10)] p-2 sm:p-3 text-gray-700 text-[13px] font-semibold md:text-center focus:outline-none focus:ring-2 focus:ring-blue-400"
               value={pincode}
               onChange={(e) => setPincode(e.target.value)}
             />
@@ -424,11 +438,12 @@ const HealthInsurance = () => {
         </form>
 
         {/* Right - Image */}
-        <div className="flex justify-center items-center md:absolute md:z-10 md:pl-170 md:pt-12 p-8">
+        <div className="w-full relative h-auto mb-3 mx-0 z-20
+                     lg:top-[50px] lg:right-10">
           <img
             src="/images/hospital-bed.png"
             alt="Hospital Bed"
-            className="w-auto h-auto"
+            className="object-contain w-full lg:w-[600px] lg:h-[550px]"
           />
         </div>
       </div>
@@ -442,10 +457,10 @@ const HealthInsurance = () => {
                    flex flex-col items-center justify-center text-center"
       >
         <div className="mb-16 px-4 max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#222] mb-10">
+          <h1 className="text-[28px] md:text-[46px] font-semibold text-[#22272B] mb-10">
             Health Insurance & its Type
-          </h2>
-          <p className="text-gray-600 text-[15px] md:text-[20px] leading-relaxed">
+          </h1>
+          <p className="text-[#22272BCC] text-[14px] md:text-[15px] leading-relaxed">
             Health Insurance is also known as Mediclaim. It helps you to cover expenses related to
             hospitalisation arising out of any accident or medical disease. Once you buy Health Insurance,
             all or part of your expenses incurred in hospital will be paid by the insurance company.
@@ -456,16 +471,16 @@ const HealthInsurance = () => {
         <div className="flex flex-col lg:flex-row justify-center items-center gap-8 md:gap-12 px-4 w-full">
 
           {/* Card 1: Individual Health Insurance */}
-          <div className="flex flex-col items-center max-w-sm">
+          <div className="flex flex-col items-center max-w-sm h-[">
             <img
               src="/svg/individual-icon.svg"
               alt="Individual Icon"
               className="w-16 h-16 flex-shrink-0 mb-6 text-blue-500" 
             />
-            <h3 className="text-2xl font-semibold text-[#222] mb-4">
+            <h3 className="text-[16px] md:text-[20px] font-semibold text-[#222] mb-5">
               Individual Health Insurance
             </h3>
-            <p className="text-gray-600 text-[14px] md:text-[17px] leading-relaxed">
+            <p className="text-[#22272BCC] text-[14px] md:text-[15px] leading-relaxed">
               It covers only a single Individual under the Health Insurance Policy. Insurance policy will cover
               medical expenses related to hospitalisation, Injury, room rent etc.
             </p>
@@ -479,10 +494,10 @@ const HealthInsurance = () => {
               alt="Family Icon"
               className="w-16 h-16 flex-shrink-0 mb-6 text-blue-500"
             />
-            <h3 className="text-2xl font-semibold text-[#222] mb-4">
+            <h3 className="text-[16px] md:text-[20px] font-semibold text-[#222] mb-6">
               Family Floater Health Insurance
             </h3>
-            <p className="text-gray-600 text-[14px] md:text-[17px] leading-relaxed">
+            <p className="text-[#22272BCC] text-[14px] md:text-[15px] leading-relaxed">
               It covers the whole family of 2 or more person under a single Health insurance policy.
               Insurance Cover under this policy can be utilised by 1 person or all the members covered
               under this policy. This is beneficial because the premium is comparatively lower as compared
@@ -498,10 +513,10 @@ const HealthInsurance = () => {
               alt="Group Icon"
               className="w-16 h-16 flex-shrink-0 mb-6 text-blue-500"
             />
-            <h3 className="text-2xl font-semibold text-[#222] mb-4">
+            <h3 className="text-[16px] md:text-[20px] font-semibold text-[#222] mb-4">
               Group Health Insurance
             </h3>
-            <p className="text-gray-600 leading-relaxed text-[14px] md:text-[17px]">
+            <p className="leading-relaxed text-[#22272BCC] text-[14px] md:text-[15px]">
               Group Policy is mainly designed for corporates where group of employees are working together. This policy is offered to employees at a very low cost premium.
             </p>
           </div>
@@ -518,7 +533,7 @@ const HealthInsurance = () => {
                  flex flex-col items-center"
     >
       {/* Section Title */}
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#222] mb-12 md:mb-30 text-center">
+      <h2 className="text-[28px] md:text-[46px] font-semibold text-[#22272B] mb-12 md:mb-30 text-center">
         What does Health Insurance Policy Cover?
       </h2>
 
@@ -530,11 +545,11 @@ const HealthInsurance = () => {
             <img
               src={item.icon}
               alt={item.alt}
-              className="w-16 h-16 flex-shrink-0 mb-4" 
+              className="w-14 h-14 flex-shrink-0 mb-4" 
               
             />
             {/* Description Text */}
-            <p className="md:text-[20px] text-[16px] text-[#222] leading-tight max-w-[150px]">
+            <p className="md:text-[14px] text-[12px] text-[#222222] leading-tight max-w-[150px]">
               {item.text}
             </p>
           </div>
@@ -548,11 +563,11 @@ const HealthInsurance = () => {
             <img
               src={item.icon}
               alt={item.alt}
-              className="w-16 h-16 flex-shrink-0 mb-4" 
+              className="w-14 h-14 flex-shrink-0 mb-4" 
               
             />
             {/* Description Text */}
-            <p className="md:text-[20px] text-[16px] text-[#222] leading-tight max-w-[150px]">
+            <p className="md:text-[14px] text-[12px] text-[#222222] leading-tight max-w-[150px]">
               {item.text}
             </p>
           </div>
@@ -571,8 +586,8 @@ const HealthInsurance = () => {
       >
         
         <h2
-          className="text-[#22272B] text-center mb-16 md:mb-25
-                     text-4xl md:text-5xl lg:text-[56px] font-normal" 
+          className="text-center mb-16 md:mb-25
+                     text-[28px] md:text-[46px] font-semibold text-[#22272B]" 
         >
           What to look for in Health Insurance?
         </h2>
@@ -581,10 +596,10 @@ const HealthInsurance = () => {
 <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-y-5 lg:gap-y-8 lg:gap-x-24 max-w-5xl w-full px-4">
   {points.map((point, index) => (
     <div key={index} className="flex flex-col">
-      <h3 className="md:text-[20px] text-[16px] font-semibold text-[#222222] mb-2">
+      <h3 className="md:text-[18px] text-[14px] font-semibold text-[#222222] mb-2">
         {point.title}
       </h3>
-      <p className="text-[#22272BCC] md:text-[15px] text-[14px] leading-relaxed">
+      <p className="text-[#22272BCC] md:text-[14px] text-[12px] leading-relaxed">
         {point.description}
       </p>
     </div>
@@ -607,13 +622,13 @@ const HealthInsurance = () => {
       </section>
     </div>
 
-    {/*BeneFits Seciton*/}
+    {/*BeneFits Section*/}
 
     <div className="mx-4 flex justify-center items-center">
       {/* Main section container */}
       <section
         className="w-full max-w-[1880px] flex-shrink-0
-                   rounded-[30px] p-10 opacity-90
+                   rounded-[30px] p-5 md:p-20 opacity-90
                    flex flex-col items-center justify-center"
         style={{
           background: 'linear-gradient(250deg, #24BDED 0%, #47B7FF 100%)',
@@ -622,7 +637,7 @@ const HealthInsurance = () => {
         {/* Heading */}
         <h2
           className="text-white text-center mb-16 md:mb-20
-                     text-4xl md:text-5xl lg:text-[56px] font-normal"
+                     text-[28px] md:text-[46px] font-semibold"
         >
           Benefits of Health Insurance
         </h2>
@@ -631,10 +646,10 @@ const HealthInsurance = () => {
 <div className="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 md:gap-x-12 lg:gap-x-20 lg:gap-y-16 max-w-7xl w-full px-4">
   {benefits.map((benefit, index) => (
     <div key={index} className="flex flex-col text-white">
-      <h3 className="text-[20px] md:text-[24px] font-semibold mb-2">
+      <h3 className="md:text-[18px] text-[14px] font-semibold mb-2">
         {benefit.title}
       </h3>
-      <p className="text-[18px] md:text-[20px] leading-relaxed opacity-90">
+      <p className="md:text-[15px] text-[14px] leading-relaxed opacity-90">
         {benefit.description}
       </p>
     </div>
@@ -648,7 +663,7 @@ const HealthInsurance = () => {
       <h3 className="text-[20px] md:text-[24px] font-semibold mb-2">
         {benefit.title}
       </h3>
-      <p className="text-[18px] md:text-[20px] leading-relaxed opacity-90">
+      <p className="text-[14px] md:text-[20px] leading-relaxed opacity-90">
         {benefit.description}
       </p>
     </div>

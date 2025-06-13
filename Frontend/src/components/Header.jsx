@@ -16,13 +16,20 @@ const Header = () => {
 
   const isActive = (path) => location.pathname === path;
 
+  const handleGetQuote = () => {
+    const contactSection = document.getElementById('contact-form');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const handleClaimsClick = () => {
     setShowClaimsInfo(!showClaimsInfo);
     setMenuOpen(false); 
   };
 
   return (
-    <header className="w-full bg-white py-10 px-1 sticky top-0 z-50">
+    <header className="w-full bg-white py-5 px-1 mt-6 z-50">
       <div className="flex items-center w-full px-5 justify-between">
         {/* Logo */}
         <div className="flex items-center">
@@ -52,12 +59,14 @@ const Header = () => {
 
         {/* Desktop Buttons - Right Side */}
         <div className="hidden md:flex items-center justify-center space-x-4">
-          <button className="text-lg font-medium text-blue-600 px-6 py-2 border border-blue-600 rounded-lg transition hover:bg-blue-50 whitespace-nowrap">
+          <button 
+          onClick={handleGetQuote}
+          className="w-[170px] text-lg font-medium text-blue-600 px-6 py-2 border border-blue-600 rounded-lg transition hover:bg-blue-50 whitespace-nowrap">
             Get Free Quote
           </button>
           <button
             onClick={handleClaimsClick}
-            className="text-lg font-medium text-white bg-[#4568C7] px-6 py-2 rounded-lg transition hover:bg-blue-700 flex items-center justify-center gap-2"
+            className="w-[170px]  text-lg font-medium text-white bg-[#4568C7] px-6 py-2 rounded-lg transition hover:bg-blue-700 flex items-center justify-center gap-2"
           >
             Claims
             <svg
@@ -111,7 +120,9 @@ const Header = () => {
               </a>
             ))}
             <div className="border-t border-gray-200 px-4 py-3 flex flex-col space-y-2">
-              <button className="w-full text-center text-lg font-medium text-[#4568C7] px-4 py-2 border border-[#4568C7] rounded-lg transition hover:bg-blue-50">
+              <button 
+              onClick={handleGetQuote}
+              className="w-full text-center text-lg font-medium text-[#4568C7] px-4 py-2 border border-[#4568C7] rounded-lg transition hover:bg-blue-50">
                 Get Free Quote
               </button>
               <button
@@ -181,7 +192,7 @@ const Header = () => {
               <div>
                 <p className="text-sm text-gray-800 font-medium">whatsapp us</p>
                 <a
-                  href="https://wa.me/+919876543210"
+                  href="https://wa.me/919876543210?text=Hi,%20I'm%20interested%20in%20learning%20more%20about%20your%20insurance%20services."
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-sm text-blue-600 font-medium break-all hover:underline"

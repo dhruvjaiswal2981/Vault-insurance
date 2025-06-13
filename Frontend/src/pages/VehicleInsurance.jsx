@@ -6,6 +6,8 @@ const VehicleInsurance = () => {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [policyType, setPolicyType] = useState("new");
+  const [vehicleNumber, setVehicleNumber] = useState("");
+  
 
   const navLinks = [
     { name: "home", path: "/" },
@@ -16,6 +18,13 @@ const VehicleInsurance = () => {
   ];
 
   const isActive = (path) => location.pathname === path;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Policy Type:", policyType);
+    console.log("Vehicle Number:", vehicleNumber);
+    // Add your form submission logic here
+  };
 
   const coverageItems1 = [
     {
@@ -147,7 +156,7 @@ const VehicleInsurance = () => {
   return (
     <>
       <header className="w-full sticky z-50 bg-[linear-gradient(250deg,#24BDED_0%,#47B7FF_100%)]">
-          <div className="flex items-center w-full px-8 justify-between py-12">
+          <div className="flex items-center w-full px-8 justify-between py-5">
             {/* Logo */}
             <div className="flex items-center">
               <img
@@ -218,52 +227,85 @@ const VehicleInsurance = () => {
       </header>
 
 
-      {/* Hero Section start*/}
+    {/* Hero Section start*/}
 
-    <section className="w-full py-12 px-4 md:px-12 lg:px-24 bg-[linear-gradient(250deg,#24BDED_0%,#47B7FF_100%)]">
-      <div className="flex flex-col-reverse lg:flex-row items-center justify-between">
-
-        {/* Left - Form Section */}
-        <form  className="bg-white rounded-3xl shadow-lg w-[780px] h-[550px] p-8 lg:p-10 lg:pr-50 relative">
-          <h2 className="text-3xl font-bold text-[#222] mb-2 pt-10">Vehicle Insurance</h2>
-          <p className="text-gray-600 mb-6">Compare & Buy Best Fit Health Insurance</p>
-
-          {/* Policy Type */}
-          <div className="flex gap-6 mb-6">
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="policy"
-                value="new"
-                checked={policyType === "new"}
-                onChange={() => setPolicyType("new")}
-                className="accent-blue-500"
-              />
-              <span className="text-[#111] font-medium">New Vehicle</span>
-            </label>
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="policy"
-                value="renew"
-                checked={policyType === "renew"}
-                onChange={() => setPolicyType("renew")}
-                className="accent-blue-500"
-              />
-              <span className="text-[#111] font-medium">Old Vehicle</span>
-            </label>
-          </div>
-        </form>
-
-        {/* Right - Image */}
-        <div className="flex justify-center items-center absolute md:pl-180 md:pt-45 p-8">
-          <img
-            src="/images/Vehicle Insurance.png"
-            alt="vehicle-insaurance"
-            className="w-auto h-auto"
-          />
-        </div>
+    <section className="relative w-full py-12 px-4 md:px-12 lg:px-24
+                 bg-[linear-gradient(250deg,#24BDED_0%,#47B7FF_100%)]
+                 overflow-hidden
+                  flex flex-col justify-center">
+      <div
+        className="relative w-full h-auto mb-3 mx-auto z-20
+                   absolute  lg:top-[90px] lg:left-[600px]"
+      >
+        <img
+          src="/images/Vehicle Insurance.png"
+          alt="vehicle-insurance"
+          className="object-contain w-auto lg:w-[600px] lg:h-[550px]"
+          
+        />
       </div>
+
+      <form
+        onSubmit={handleSubmit}
+        className="relative  max-w-[780px] h-auto p-8 md:p-12 mx-auto
+                   bg-white rounded-[30px] shadow-2xl z-10
+                   flex flex-col justify-start items-start
+                   lg:absolute lg:w-[700px] lg:h-[540px] lg:top-[50px] lg:left-[60px]"
+      >
+        <h2 className="text-[28px] md:text-[46px] font-semibold text-[#222] mb-1">Vehicle Insurance</h2>
+        <p className="text-[14px] md:text-[16px] text-[#22272BCC] mb-8">Compare & Buy Best Fit Vehicle Insurance</p>
+
+        {/* Policy Type */}
+        <div className="flex flex-row gap-4 sm:gap-8 mb-12">
+          <label className="flex items-center space-x-2 cursor-pointer">
+            <input
+              type="radio"
+              name="policy"
+              value="new"
+              checked={policyType === "new"}
+              onChange={() => setPolicyType("new")}
+              className="accent-[#6290FF] w-5 h-5"
+            />
+            <span className="text-[#22272B] text-[12px] font-medium">New Vehicle</span>
+          </label>
+          <label className="flex items-center space-x-2 cursor-pointer">
+            <input
+              type="radio"
+              name="policy"
+              value="renew"
+              checked={policyType === "renew"}
+              onChange={() => setPolicyType("renew")}
+              className="accent-[#6290FF] w-5 h-5"
+            />
+            <span className="text-[#22272B] text-[12px] font-medium">Old Vehicle</span>
+          </label>
+        </div>
+
+        {/* Vehicle Number Input */}
+        <div className="flex  flex-row items-center w-full  max-w-[340px] rounded-xl shadow-md overflow-hidden border border-gray-100 mb-8">
+          <input
+            type="text"
+            placeholder="Enter Vehicle Number"
+            value={vehicleNumber}
+            onChange={(e) => setVehicleNumber(e.target.value)}
+            className="flex-grow py-2 px-4 text-gray-700 text-lg focus:outline-none border-none bg-white w-full sm:w-auto"
+          />
+          <button
+            type="submit"
+            className="bg-[#62B3F0] text-white font-semibold py-2 px-4 m-2 max-w-[80px] text-[15px] rounded-[5px] hover:bg-blue-600 transition-colors duration-200 cursor-pointer w-full sm:w-auto"
+          >
+            Search
+          </button>
+        </div>
+
+        {/* "Brand New Vehicle?" link */}
+        <p className="text-[#273640] font-semibold text-[14px] mt-4">
+          Brand New Vehicle?{' '}
+          <a href="#" className="text-[#3099D0] hover:underline cursor-pointer font-medium">
+            Click Here
+          </a>
+        </p>
+      </form>
     </section>
 
     {/* Hero Section end*/}
@@ -279,10 +321,10 @@ const VehicleInsurance = () => {
                    flex flex-col items-center justify-center text-center"
       >
         <div className="mb-16 px-4 max-w-4xl">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#222] mb-10">
+          <h3 className="text-[28px] md:text-[40px] font-semibold text-[#22272B] mb-10">
             Vehicle Insurance & its Type
-          </h2>
-          <p className="text-gray-600 text-[15px] md:text-[20px] leading-relaxed">
+          </h3>
+          <p className="text-[#22272BCC] text-[14px] md:text-[15px] leading-relaxed">
             Cars, two-wheelers, lorries, autorickshaws, and electric vehicles (EVs) are among the many vehicle types covered by motor insurance, also known as vehicle insurance. In the event of an accident involving your covered car, it protects you from third-party responsibilities. Additionally, a motor insurance policy covers the cost of repairs for your own car in the event of an accident, natural disaster, theft, or fire. To drive lawfully in public places in India, you must obtain at least third-party auto insurance.
           </p>
         </div>
@@ -295,12 +337,12 @@ const VehicleInsurance = () => {
             <img
               src="/svg/individual-icon.svg"
               alt="Individual Icon"
-              className="w-16 h-16 flex-shrink-0 mb-6 text-blue-500" 
+              className="w-12 h-12 flex-shrink-0 mb-6 text-blue-500" 
             />
-            <h3 className="text-2xl font-semibold text-[#222] mb-4">
+            <h3 className="text-[16px] md:text-[20px] font-semibold text-[#222] mb-4">
               Comprehensive
             </h3>
-            <p className="text-gray-600 text-[14px] md:text-[17px] leading-relaxed">
+            <p className="text-[#22272BCC] text-[14px] md:text-[15px] leading-relaxed">
               Comprehensive insurance offers the broadest protection. It covers third-party liabilities (damage to someone else or their property) as well as damages to your own vehicle, regardless of who is at fault. This includes accidents, theft, fire, natural disasters, and vandalism, providing a complete safety net for your vehicle and potential liabilities.
             </p>
           </div>
@@ -312,12 +354,12 @@ const VehicleInsurance = () => {
             <img
               src="/svg/family-icon.svg" 
               alt="Family Icon"
-              className="w-16 h-16 flex-shrink-0 mb-6 text-blue-500"
+              className="w-12 h-12 flex-shrink-0 mb-6 text-blue-500"
             />
-            <h3 className="text-2xl font-semibold text-[#222] mb-4">
+            <h3 className="text-[16px] md:text-[20px] font-semibold text-[#222] mb-4">
               Own Damage
             </h3>
-            <p className="text-gray-600 text-[14px] md:text-[17px] leading-relaxed">
+            <p className="text-[#22272BCC] text-[14px] md:text-[15px] leading-relaxed">
               Own damage insurance specifically focuses on covering damages to your own insured vehicle. This includes losses or damages caused by accidents, theft, fire, natural calamities, and other specified perils. It does not cover any liability towards third parties. This type of policy is often chosen by those who want to protect their own vehicle but may not be legally required or choose not to have third-party coverage.
             </p>
           </div>
@@ -328,12 +370,12 @@ const VehicleInsurance = () => {
             <img
               src="/images/group-icon.png" 
               alt="Group Icon"
-              className="w-16 h-16 flex-shrink-0 mb-6 text-blue-500"
+              className="w-12 h-12 flex-shrink-0 mb-6 text-blue-500"
             />
-            <h3 className="text-2xl font-semibold text-[#222] mb-4">
+            <h3 className="text-[16px] md:text-[20px] font-semibold text-[#222] mb-4">
               Third-Party
             </h3>
-            <p className="text-gray-600 leading-relaxed text-[14px] md:text-[17px]">
+            <p className="leading-relaxed text-[#22272BCC] text-[14px] md:text-[15px]">
               Third-party insurance is the most basic and legally mandated form of motor insurance in many places, including India. It provides coverage for the financial losses you might cause to a third party due to an accident involving your vehicle. This includes damages to their property, injury, or even death. It does not, however, cover any damages to your own vehicle.
             </p>
           </div>
@@ -352,7 +394,7 @@ const VehicleInsurance = () => {
                  flex flex-col items-center"
     >
       {/* Section Title */}
-      <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#222] mb-12 md:mb-30 text-center">
+      <h2 className="text-[28px] md:text-[46px] font-semibold text-[#22272B] mb-12 md:mb-30 text-center">
         What does Vehicle Insurance Cover?
       </h2>
 
@@ -364,11 +406,11 @@ const VehicleInsurance = () => {
             <img
               src={item.icon}
               alt={item.alt}
-              className="w-16 h-16 flex-shrink-0 mb-4" 
+              className="w-12 h-12 flex-shrink-0 mb-4" 
               
             />
             {/* Description Text */}
-            <p className="md:text-[20px] text-[16px] text-[#222] leading-tight max-w-[150px]">
+            <p className="md:text-[14px] text-[12px] text-[#222] leading-tight max-w-[150px]">
               {item.text}
             </p>
           </div>
@@ -387,7 +429,7 @@ const VehicleInsurance = () => {
               
             />
             {/* Description Text */}
-            <p className="md:text-[20px] text-[16px] text-[#222] leading-tight max-w-[150px]">
+            <p className="md:text-[14px] text-[12px] text-[#222] leading-tight max-w-[150px]">
               {item.text}
             </p>
           </div>
@@ -406,7 +448,7 @@ const VehicleInsurance = () => {
               
             />
             {/* Description Text */}
-            <p className="md:text-[20px] text-[16px] text-[#222] leading-tight max-w-[150px]">
+            <p className="md:text-[14px] text-[12px] text-[#222] leading-tight max-w-[150px]">
               {item.text}
             </p>
           </div>
@@ -428,7 +470,7 @@ const VehicleInsurance = () => {
         
         <h2
           className="text-[#22272B] text-center mb-16 md:mb-25
-                     text-4xl md:text-5xl lg:text-[56px] font-normal" 
+                     text-[28px] md:text-[46px] font-semibold" 
         >
           What to look for in Vehicle Insurance?
         </h2>
@@ -437,10 +479,10 @@ const VehicleInsurance = () => {
         <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-y-5 lg:gap-y-8 lg:gap-x-24 max-w-5xl w-full px-4">
           {points.map((point, index) => (
             <div key={index} className="flex flex-col">
-              <h3 className="md:text-[20px] text-[16px] font-semibold text-[#222222] mb-2">
+              <h3 className="md:text-[18px] text-[14px] font-semibold text-[#222222] mb-2">
                 {point.title}
               </h3>
-              <p className="text-[#22272BCC] md:text-[15px] text-[14px] leading-relaxed">
+              <p className="text-[#22272BCC] md:text-[14px] text-[12px] leading-relaxed">
                 {point.description}
               </p>
             </div>
@@ -459,7 +501,7 @@ const VehicleInsurance = () => {
                  overflow-hidden
                   mx-4 my-4" 
     >
-      <h1 className="text-white md:text-left text-center font-gilroySemiBold md:text-[40px] text-[28px] font-bold p-10 pt-20">
+      <h1 className="text-white md:text-left text-center text-[28px] md:text-[46px] font-semibold p-10 pt-20">
             Benefits of Vehicle Insurance
       </h1>
       {/* Content Grid DeskTop */}
@@ -470,10 +512,10 @@ const VehicleInsurance = () => {
           <div className="grid grid-cols-3 gap-x-10 gap-y-20">
             {benefitsData.map((benefit, index) => (
               <div key={index} className="flex flex-col">
-                <h3 className="text-white font-gilroySemiBold md:text-[24px] text-[20px] font-bold mb-2">
+                <h3 className="text-white md:text-[18px] text-[14px] font-semibold mb-2">
                   {benefit.heading}
                 </h3>
-                <p className="text-white text-opacity-80 font-gilroyMedium text-[14px] md:text-[16px]">
+                <p className="text-white text-opacity-80 md:text-[15px] text-[14px]">
                   {benefit.paragraph}
                 </p>
               </div>
@@ -500,10 +542,10 @@ const VehicleInsurance = () => {
             <div className="grid grid-cols-1 gap-y-10 w-full max-w-sm mb-30"> 
               {benefitsData1.map((benefit, index) => (
                 <div key={index} className="flex flex-col text-center">
-                  <h3 className="text-white font-gilroySemiBold text-[22px] font-bold mb-3">
+                  <h3 className="text-white text-[20px] md:text-[24px] font-semibold mb-3">
                     {benefit.heading}
                   </h3>
-                  <p className="text-white text-opacity-80 font-gilroyMedium text-[20px] leading-[25px]">
+                  <p className="text-white text-opacity-80 text-[18px] md:text-[20px] leading-relaxed ">
                     {benefit.paragraph}
                   </p>
                 </div>

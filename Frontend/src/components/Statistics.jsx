@@ -66,61 +66,67 @@ const Statistics = () => {
   const testimonials = [
     {
       id: 1,
-      quote: "They organized their work and internal management was outstanding!",
-      name: "Denise the menace",
+      quote: "they organized their work and internal management was outstanding!",
+      name: "denise the menace",
       image: "/images/testimonial1.png"
     },
     {
       id: 2,
-      quote: "Working with them was a great experience",
+      quote: "working with them was a great experience",
       name: "richie rich",
       image: "/images/testimonial2.png"
     },
     {
       id: 3,
-      quote: "They tailor their solutions to our specifin needs and goals.",
+      quote: "they tailor their solutions to our specifin needs and goals.",
       name: "noddy",
       image: "/images/testimonial-3.png"
+    },
+    {
+      id: 4,
+      quote: "working with them was a great experience",
+      name: "richie rich",
+      image: "/images/testimonial2.png"
     }
   ];
 
   return (
     <>
       {/* Statistics Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-[#5bb5ee] to-[#7aa1ff] rounded-[30px] mx-4 md:mx-5 my-8 md:my-10 relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-gradient-to-r from-[#5bb5ee] to-[#7aa1ff] rounded-[30px] mx-4 md:mx-5 my-5 md:my-5 relative overflow-hidden">
         <div className="relative z-10">
           {/* Statistics Grid */}
       <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mb-12 md:mb-16">
   <div className="text-center p-4">
-    <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4">
+    <div className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl text-white mb-2 md:mb-4">
       {animatedStats.years}+
     </div>
-    <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
-      Years of Experience
+    <div className="text-[14px] md:text-[18px] text-white">
+      years of experience
     </div>
   </div>
   <div className="text-center p-4">
-    <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4">
+    <div className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl text-white mb-2 md:mb-4">
       {animatedStats.clients}+
     </div>
-    <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
-      Clients Served
+    <div className="text-[14px] md:text-[18px]  text-white">
+      clients served
     </div>
   </div>
   <div className="text-center p-4">
-    <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4">
+    <div className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl text-white mb-2 md:mb-4">
       ₹{animatedStats.claims} Cr+
     </div>
-    <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
-      in Claims Paid
+    <div className="text-[14px] md:text-[18px] text-white">
+      in claims paid
     </div>
   </div>
   <div className="text-center p-4">
-    <div className="text-3xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2 md:mb-4">
+    <div className="text-3xl sm:text-3xl md:text-5xl lg:text-6xl text-white mb-2 md:mb-4">
       {animatedStats.awards}+
     </div>
-    <div className="text-lg md:text-xl lg:text-2xl font-semibold text-white">
-      Industry Awards
+    <div className="text-[14px] md:text-[18px]  text-white">
+      industry awards
     </div>
   </div>
 </div>
@@ -131,7 +137,7 @@ const Statistics = () => {
 <div className="w-full px-4 md:px-6 lg:px-0 mb-12 md:mb-20 mt-12 ml-6 md:mt-30">
   <div className="bg-white rounded-l-[20px] md:rounded-l-[30px] p-4 sm:p-6 md:p-20 relative">
 
-    <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#22272b] mb-6 sm:mb-8 md:mb-12 text-center md:text-left">
+    <h2 className="text-4xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#22272b] mb-15 sm:mb-8 md:mb-20 text-left">
       Our Insurance Partners
     </h2>
 
@@ -226,7 +232,7 @@ const Statistics = () => {
     </div>
 
     {/* Right side image (only for desktop) */}
-    <div className="absolute z-10 right-0 top-1/2 -translate-y-1/2 lg:block -scale-x-100">
+    <div className="absolute z-10 right-0 top-1/2 -translate-y-1/2 lg:block -scale-x-100 mt-10">
       <img
         src="/images/search-img.png"
         alt="Statistics Illustration"
@@ -240,19 +246,19 @@ const Statistics = () => {
           
   {/* Testimonials Section */}
     <div className="mt-12 md:mt-30 px-4">
-      <h2 className="text-3xl md:text-4xl lg:text-[42px] font-bold text-white mb-4 text-left">
+      <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 text-left md:px-10">
         Stories from Our Vaulters
       </h2>
-      <p className="text-lg md:text-xl text-white/90 mb-10 md:mb-12 text-left">
+      <p className="text-[10px] md:text-[14px] text-white/90 mb-10 md:mb-12 text-left md:px-10">
         Join 1000s of Happy Souls Who Have Trusted Vault — Become a Vaulter Today!
       </p>
 
       <Swiper
         modules={[Autoplay, Pagination]}
-        spaceBetween={30}
+        spaceBetween={20}
         loop={true}
         autoplay={{
-          delay: 3000,
+          delay: 2000,
           disableOnInteraction: false,
         }}
         pagination={{ clickable: true }}
@@ -261,12 +267,12 @@ const Statistics = () => {
           768: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
         }}
-        className="mb-10"
+        className="mb-10 swiper-container-with-custom-pagination"
       >
         {testimonials.map((testimonial) => (
           <SwiperSlide key={testimonial.id}>
             <div className="bg-white rounded-[24px] p-8 h-full shadow-md">
-              <p className="text-xl md:text-2xl font-bold text-[#4788dc] mb-8 leading-relaxed">
+              <p className="text-[14px] md:text-[18px] font-bold text-[#4788dc] mb-8 leading-relaxed">
                 “{testimonial.quote}”
               </p>
               <div className="flex items-center space-x-4">
@@ -275,7 +281,7 @@ const Statistics = () => {
                   alt={testimonial.name}
                   className="w-14 h-14 rounded-full object-cover"
                 />
-                <span className="text-base md:text-lg font-semibold text-[#596069]">
+                <span className="text-base md:text-[12px] font-semibold text-[#596069]">
                   {testimonial.name}
                 </span>
               </div>
@@ -290,9 +296,9 @@ const Statistics = () => {
       {/* Corporate Clients Section */}
       <section className="py-12 md:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold text-[#22272b] mb-8 md:mb-12 lg:mb-16">Our Corporate Insurance Clients</h2>
+          <h2 className="text-4xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold text-[#22272b] mb-8 md:mb-12 lg:mb-16">Our Corporate Insurance Clients</h2>
           
-          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 lg:gap-16">
+          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 lg:gap-12">
             <img src="/images/NCC-logo.png" alt="NCC" className="h-16 md:h-20 lg:h-24 w-auto" />
             <img src="/images/NCC-1-logo.png" alt="NCC-1" className="h-16 md:h-20 lg:h-24 w-auto" />
             <img src="/images/trivik.png" alt="Trivik" className="h-12 md:h-16 lg:h-20 w-auto" />
