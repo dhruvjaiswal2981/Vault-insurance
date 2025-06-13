@@ -15,7 +15,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch('http://localhost:4000/api/contact')//  http://localhost:5000/api/contact
+    fetch('https://vault-insurance.onrender.com/api/contact')//  http://localhost:5000/api/contact
       .then((res) => res.json())
       .then((data) => {
         setContacts(data);
