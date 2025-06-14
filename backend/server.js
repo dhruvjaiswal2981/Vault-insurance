@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/vault', {
+mongoose.connect('mongodb+srv://dhruvujjain:Dhruv%402981@cluster0.lvmmjnp.mongodb.net/Vault?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
