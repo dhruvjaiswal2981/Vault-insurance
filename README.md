@@ -25,7 +25,7 @@ A Vault insurance website built using React, featuring user-facing pages and an 
 - Admin Login Page (`/admin`)
 - Admin Dashboard (`/admin/dashboard`) with:
   - Hardcoded credentials (`Admin / admin@123`)
-  - Fetches contact form data from backend (`http://localhost:5000/api/contact`)
+  - Fetches contact form data from backend (`http://localhost:4000/api/contact`)
   - Protected route access
 
 ---
@@ -36,7 +36,7 @@ A Vault insurance website built using React, featuring user-facing pages and an 
 - React Router DOM
 - Tailwind CSS
 - NodeJs
-- Sqlite
+- MongoDb
 - Axios for API calls
 
 ---
@@ -82,21 +82,49 @@ Your app will be available at http://localhost:5173/
 ```bash
 src/
     ├── components/
-    │   ├── Header.jsx
-    │   ├── HeroSection.jsx
-    │   ├── InsuranceSections.jsx
-    │   ├── CoreValuesSection.jsx
-    │   ├── About.jsx
-    │   ├── Statistics.jsx
-    │   ├── Contact.jsx
-    │   └── Footer.jsx
+    ├── ├──MainDashboard/
+    │     ├── Header.jsx
+    │     ├── HeroSection.jsx
+    │     ├── InsuranceSections.jsx
+    │     ├── CoreValuesSection.jsx
+    │     ├── About.jsx
+    │     ├── Statistics.jsx
+    │     ├── Contact.jsx
+    │     └── Footer.jsx
+    ├── ├──BusinessInsuranceDashboard/
+    │     ├── HeaderBusiness.jsx
+    │     ├── HeroBusiness.jsx
+    │     ├── SerachBarBusiness.jsx
+    ├── ├──LifeInsuranceDashboard/
+    │     ├── HeaderLife.jsx
+    │     ├── HeroLife.jsx
+    │     ├── TypeLife.jsx
+    ├── ├──HealthInsuranceDashboard/
+    │     ├── HeaderHealth.jsx
+    │     ├── HealthBenefits.jsx
+    │     ├── HealthPoints.jsx
+    ├──   ├── PolicyCoverHealth.jsx 
+    │     ├── TypeHealth.jsx
+    │     ├── HeroHealth.jsx
+    ├── ├──VehicleInsuranceDashboard/
+    │     ├── HeaderVehicle.jsx
+    │     ├── HeroVehicle.jsx
+    │     ├── TypeVehicle.jsx
+    |     ├── VechiclePolicyCover.jsx
+    │     ├── VehicleBenefits.jsx
+    │     ├── VehiclePoints.jsx
+    ├── admin/
+    │     ├── AdminDashboard.jsx
+    │     ├── BusinessQuotesDashboard.jsx
+    │     ├── ContactsDashboard.jsx
+    |     ├── HealthLeadsDashboard.jsx
+    │     ├── LoginPage.jsx
+    │     ├── NotFound.jsx
     ├── pages/
-    │   ├── LoginPage.jsx
-    │   └── AdminDashboard.jsx
     │   ├── BusinessInsurance.jsx
     │   ├── HealthInsurance.jsx
     │   ├── LifeInsurance.jsx
-    │   ├── NotFound.jsx
+    │   ├── ThankYou.jsx
     │   └── VehicleInsurance.jsx
     ├── App.jsx
     ├── index.jsx
@@ -121,47 +149,3 @@ src/
 - 💻 Developed by Dhruv Jaiswal
 - 🚀 Happy Coding! 🎉
 
-
-
-{/* Preferred Companies */}
-          <div className="relative">
-            <label className="block text-[14px] font-medium text-[#22272B] mb-2">Preferred Life Insurance Companies</label>
-            <div className="flex flex-wrap gap-2">
-              <label className="flex items-center space-x-2 cursor-pointer bg-white border border-blue-400 px-4 py-2 rounded-md">
-                <input
-                  type="checkbox"
-                  name="company"
-                  value="hdfc"
-                  className="accent-[#6290FF] w-4 h-4"
-                />
-                <span className="text-[#22272B] text-[12px] font-medium">HDFC</span>
-              </label>
-              <label className="flex items-center space-x-2 cursor-pointer  bg-white border border-blue-400 px-4 py-2 rounded-md">
-                <input
-                  type="checkbox"
-                  name="company"
-                  value="maxlife"
-                  className="accent-[#6290FF] w-4 h-4"
-                />
-                <span className="text-[#22272B] text-[12px] font-medium">MAX LIFE</span>
-              </label>
-              <label className="flex items-center space-x-2 cursor-pointer  bg-white border border-blue-400 px-4 py-2 rounded-md">
-                <input
-                  type="checkbox"
-                  name="company"
-                  value="birla"
-                  className="accent-[#6290FF] w-4 h-4"
-                />
-                <span className="text-[#22272B] text-[12px] font-medium">BIRLA SUN LIFE</span>
-              </label>
-              <label className="flex items-center space-x-2 cursor-pointer  bg-white border border-blue-400 px-4 py-2 rounded-md">
-                <input
-                  type="checkbox"
-                  name="company"
-                  value="lic"
-                  className="accent-[#6290FF] w-4 h-4"
-                />
-                <span className="text-[#22272B] text-[12px] font-medium">LIC</span>
-              </label>
-            </div>
-          </div>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { getLifeInsuranceLeads } from '../api/LifeApi';
+
 
 const AdminDashboard = () => {
   const [activityData, setActivityData] = useState([]);
@@ -9,87 +11,97 @@ const AdminDashboard = () => {
   const [stats, setStats] = useState({
     contacts: 0,
     healthLeads: 0,
-    businessQuotes: 0
+    businessQuotes: 0,
+    lifeLeads: 0
   });
 
   useEffect(() => {
     const fetchRecentActivity = async () => {
-    try {
-          setLoading(true);
-          
-          // Fetch data from all endpoints
-          const [contactsRes, businessRes, healthRes] = await Promise.all([
-            axios.get('https://vault-insurance.onrender.com/api/contact'),
-            axios.get('https://vault-insurance.onrender.com/api/business-quotes'),
-            axios.get('https://vault-insurance.onrender.com/api/health-insurance-leads')
-          ]);
+      try {
+        setLoading(true);
+        
+        // Fetch data from all endpoints including life insurance
+        const [contactsRes, businessRes, healthRes, lifeRes] = await Promise.all([
+          axios.get('https://vault-insurance.onrender.com/api/contact'),
+          axios.get('https://vault-insurance.onrender.com/api/business-quotes'),
+          axios.get('https://vault-insurance.onrender.com/api/health-insurance-leads'),
+          getLifeInsuranceLeads()
+        ]);
 
-          // Set stats
-          setStats({
-            contacts: contactsRes.data.length,
-            healthLeads: healthRes.data.length,
-            businessQuotes: businessRes.data.length
-          });
+        // Set stats
+        setStats({
+          contacts: contactsRes.data.length,
+          healthLeads: healthRes.data.length,
+          businessQuotes: businessRes.data.length,
+          lifeLeads: lifeRes.length
+        });
 
-          // Helper function to format date properly
-          const formatDate = (dateString) => {
-            try {
-              const date = new Date(dateString);
-              return isNaN(date.getTime()) 
-                ? 'Recently' 
-                : date.toLocaleString('en-US', {
-                    month: 'short',
-                    day: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                  });
-            } catch {
-              return 'Recently';
-            }
-          };
+        // Helper function to format date properly
+        const formatDate = (dateString) => {
+          try {
+            const date = new Date(dateString);
+            return isNaN(date.getTime()) 
+              ? 'Recently' 
+              : date.toLocaleString('en-US', {
+                  month: 'short',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                });
+          } catch {
+            return 'Recently';
+          }
+        };
 
-          // Process data for recent activity feed
-          const contactsActivity = contactsRes.data.slice(0, 3).map(item => ({
-            id: item._id,
-            action: "New contact form submission",
-            time: formatDate(item.createdAt || item.created_at || new Date()),
-            user: `${item.firstName || ''} ${item.lastName || ''}`.trim() || 'Anonymous',
-            type: 'contact'
-          }));
+        // Process data for recent activity feed
+        const contactsActivity = contactsRes.data.slice(0, 3).map(item => ({
+          id: item._id,
+          action: "New contact form submission",
+          time: formatDate(item.createdAt || item.created_at || new Date()),
+          user: `${item.firstName || ''} ${item.lastName || ''}`.trim() || 'Anonymous',
+          type: 'contact'
+        }));
 
-          const businessActivity = businessRes.data.slice(0, 3).map(item => ({
-            id: item._id,
-            action: "New business quote submitted",
-            time: formatDate(item.createdAt || item.created_at || new Date()),
-            user: item.business_name || item.name || 'Anonymous Business',
-            type: 'business'
-          }));
+        const businessActivity = businessRes.data.slice(0, 3).map(item => ({
+          id: item._id,
+          action: "New business quote submitted",
+          time: formatDate(item.createdAt || item.created_at || new Date()),
+          user: item.business_name || item.name || 'Anonymous Business',
+          type: 'business'
+        }));
 
-          const healthActivity = healthRes.data.slice(0, 3).map(item => ({
-            id: item._id,
-            action: "New health insurance lead",
-            time: formatDate(item.createdAt || item.created_at || new Date()),
-            user: item.fullName || 'Anonymous',
-            type: 'health'
-          }));
+        const healthActivity = healthRes.data.slice(0, 3).map(item => ({
+          id: item._id,
+          action: "New health insurance lead",
+          time: formatDate(item.createdAt || item.created_at || new Date()),
+          user: item.name || 'Anonymous',
+          type: 'health'
+        }));
 
-          // Combine and sort by time
-          const allActivity = [...contactsActivity, ...businessActivity, ...healthActivity]
-            .sort((a, b) => {
-              const dateA = new Date(a.time);
-              const dateB = new Date(b.time);
-              return isNaN(dateB.getTime()) ? -1 : isNaN(dateA.getTime()) ? 1 : dateB - dateA;
-            })
-            .slice(0, 5);
+        const lifeActivity = lifeRes.slice(0, 3).map(item => ({
+          id: item._id,
+          action: "New life insurance lead",
+          time: formatDate(item.created_at || new Date()),
+          user: item.name || 'Anonymous',
+          type: 'life'
+        }));
 
-          setActivityData(allActivity);
-        } catch (error) {
-          console.error('Error fetching activity data:', error);
-        } finally {
-          setLoading(false);
-        }
-  };
+        // Combine and sort by time
+        const allActivity = [...contactsActivity, ...businessActivity, ...healthActivity, ...lifeActivity]
+          .sort((a, b) => {
+            const dateA = new Date(a.time);
+            const dateB = new Date(b.time);
+            return isNaN(dateB.getTime()) ? -1 : isNaN(dateA.getTime()) ? 1 : dateB - dateA;
+          })
+          .slice(0, 5);
 
+        setActivityData(allActivity);
+      } catch (error) {
+        console.error('Error fetching activity data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
     fetchRecentActivity();
     
@@ -134,6 +146,18 @@ const AdminDashboard = () => {
       link: "/admin/business-quotes",
       color: "bg-purple-100 text-purple-600",
       count: stats.businessQuotes
+    },
+    {
+      title: "Life Leads",
+      description: "Manage life insurance leads and applications",
+      icon: (
+        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+      ),
+      link: "/admin/life-leads",
+      color: "bg-red-100 text-red-600",
+      count: stats.lifeLeads
     }
   ];
 
@@ -160,6 +184,14 @@ const AdminDashboard = () => {
           <div className="bg-purple-100 p-2 rounded-lg mr-3">
             <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+        );
+      case 'life':
+        return (
+          <div className="bg-red-100 p-2 rounded-lg mr-3">
+            <svg className="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
           </div>
         );
@@ -195,7 +227,7 @@ const AdminDashboard = () => {
         </motion.div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           {cards.map((card, index) => (
             <motion.div 
               key={index}
@@ -216,7 +248,7 @@ const AdminDashboard = () => {
         </div>
 
         {/* Dashboard Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {cards.map((card, index) => (
             <motion.div
               key={index}

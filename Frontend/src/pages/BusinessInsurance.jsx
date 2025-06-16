@@ -2,7 +2,7 @@ import React from "react";
 import HeaderBusiness from "../components/BusinessInsuranceDashboard/HeaderBusiness";
 import HeroBusiness from "../components/BusinessInsuranceDashboard/HeroBusiness";
 import SerachBarBusiness from "../components/BusinessInsuranceDashboard/SerachBarBusiness";
-import Footer from "../components/Footer";
+import Footer from "../components/MainDashboard/Footer";
 
 const BusinessInsurance = () => {
   

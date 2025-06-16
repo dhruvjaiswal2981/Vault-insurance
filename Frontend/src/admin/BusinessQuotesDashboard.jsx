@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getBusinessQuotes } from '../api/businessApi';
+import { FiCalendar, FiChevronDown, FiX } from 'react-icons/fi';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const BusinessQuotesPage = () => {
   const [quotes, setQuotes] = useState([]);
@@ -8,6 +11,12 @@ const BusinessQuotesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedQuote, setSelectedQuote] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [dateFilter, setDateFilter] = useState({
+    startDate: null,
+    endDate: null,
+    isActive: false
+  });
+  const [showDateFilter, setShowDateFilter] = useState(false);
 
   useEffect(() => {
     const fetchQuotes = async () => {
@@ -29,6 +38,7 @@ const BusinessQuotesPage = () => {
   useEffect(() => {
     let results = [...quotes];
     
+    // Search term filter
     if (searchTerm) {
       results = results.filter(quote =>
         quote.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -39,8 +49,16 @@ const BusinessQuotesPage = () => {
       );
     }
     
+    // Date range filter
+    if (dateFilter.isActive && dateFilter.startDate && dateFilter.endDate) {
+      results = results.filter(quote => {
+        const quoteDate = new Date(quote.created_at);
+        return quoteDate >= dateFilter.startDate && quoteDate <= dateFilter.endDate;
+      });
+    }
+    
     setFilteredQuotes(results);
-  }, [quotes, searchTerm]);
+  }, [quotes, searchTerm, dateFilter]);
 
   const openQuoteDetails = (quote) => {
     setSelectedQuote(quote);
@@ -48,6 +66,25 @@ const BusinessQuotesPage = () => {
 
   const closeQuoteDetails = () => {
     setSelectedQuote(null);
+  };
+
+  const toggleDateFilter = () => {
+    setShowDateFilter(!showDateFilter);
+  };
+
+  const applyDateFilter = () => {
+    if (dateFilter.startDate && dateFilter.endDate) {
+      setDateFilter({ ...dateFilter, isActive: true });
+      setShowDateFilter(false);
+    }
+  };
+
+  const clearDateFilter = () => {
+    setDateFilter({
+      startDate: null,
+      endDate: null,
+      isActive: false
+    });
   };
 
   // Format date for display
@@ -117,7 +154,88 @@ const BusinessQuotesPage = () => {
                 </svg>
               </div>
             </div>
+            <div className="relative">
+              <button
+                onClick={toggleDateFilter}
+                className={`flex items-center px-4 py-3 border rounded-lg transition-colors ${dateFilter.isActive ? 'border-blue-500 bg-blue-50 text-blue-600' : 'border-gray-200 hover:bg-gray-50'}`}
+              >
+                <FiCalendar className="mr-2" />
+                <span>Date Range</span>
+                <FiChevronDown className={`ml-2 transition-transform ${showDateFilter ? 'rotate-180' : ''}`} />
+              </button>
+              
+              {dateFilter.isActive && (
+                <button
+                  onClick={clearDateFilter}
+                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 shadow-sm hover:bg-red-600 transition-colors"
+                >
+                  <FiX className="h-3 w-3" />
+                </button>
+              )}
+              
+              {showDateFilter && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  className="absolute right-0 mt-2 w-full md:w-96 bg-white rounded-lg shadow-xl z-10 p-4 border border-gray-200"
+                >
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                      <DatePicker
+                        selected={dateFilter.startDate}
+                        onChange={(date) => setDateFilter({ ...dateFilter, startDate: date })}
+                        selectsStart
+                        startDate={dateFilter.startDate}
+                        endDate={dateFilter.endDate}
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                        placeholderText="Select start date"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                      <DatePicker
+                        selected={dateFilter.endDate}
+                        onChange={(date) => setDateFilter({ ...dateFilter, endDate: date })}
+                        selectsEnd
+                        startDate={dateFilter.startDate}
+                        endDate={dateFilter.endDate}
+                        minDate={dateFilter.startDate}
+                        className="w-full p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                        placeholderText="Select end date"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-end space-x-2">
+                    <button
+                      onClick={toggleDateFilter}
+                      className="px-4 py-2 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={applyDateFilter}
+                      className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                      disabled={!dateFilter.startDate || !dateFilter.endDate}
+                    >
+                      Apply
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </div>
           </div>
+          
+          {dateFilter.isActive && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              className="mt-3 text-sm text-gray-600"
+            >
+              Showing quotes from {dateFilter.startDate?.toLocaleDateString()} to {dateFilter.endDate?.toLocaleDateString()}
+            </motion.div>
+          )}
         </motion.div>
         
         {/* Quotes Table */}
