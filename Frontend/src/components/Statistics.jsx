@@ -232,7 +232,7 @@ const Statistics = () => {
     </div>
 
     {/* Right side image (only for desktop) */}
-    <div className="absolute z-10 right-0 top-1/2 -translate-y-1/2 lg:block -scale-x-100 mt-10">
+    <div className="absolute z-10 right-0 top-1/2 -translate-y-1/2 lg:block mt-10">
       <img
         src="/images/search-img.png"
         alt="Statistics Illustration"

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { submitContactForm } from '../api/contactApi';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
  const Button = ({
     children,
@@ -70,8 +72,11 @@ const Contact = () => {
       const res = await submitContactForm(formData);
 
       if (res.success) {
-        alert('Message sent successfully!');
-        window.location.reload();
+        toast.success('🎉 Your message submitted successfully! Our team will contact you shortly.', {
+              className: 'bg-green-50 text-green-800 rounded-md shadow-md border border-green-200 px-4 py-2 font-medium',
+              icon: '✅'
+            });
+        setTimeout(() => window.location.reload(), 3000);
         setFormData({
           firstName: '',
           lastName: '',
@@ -82,8 +87,12 @@ const Contact = () => {
       } else {
         alert('Failed to send message.');
       }
-    } catch (error) {
-      alert('Something went wrong!');
+    } catch (err) {
+        console.error('Quote submission failed:', err);
+        toast.error('❌ Oops! Submission failed. Please try again.', {
+          className: 'bg-red-50 text-red-800 rounded-md shadow-md border border-red-200 px-4 py-2 font-medium',
+          icon: '⚠️'
+        });
     }
   };
 
@@ -169,7 +178,7 @@ const Contact = () => {
       </div>
 
       {/* Right Side - Illustration */}
-      <div className="absolute left-140 flex justify-end md:my-15">
+      <div className="absolute left-140 flex justify-end md:my-3">
         <img
           src="/images/Waving-hand.png"
           alt="Vault Insurance Hero"
@@ -179,6 +188,9 @@ const Contact = () => {
 
     </div>
   </div>
+  
+  <ToastContainer position="top-center" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+
 </section>
 
   );

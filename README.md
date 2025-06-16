@@ -120,3 +120,48 @@ src/
 
 - 💻 Developed by Dhruv Jaiswal
 - 🚀 Happy Coding! 🎉
+
+
+
+{/* Preferred Companies */}
+          <div className="relative">
+            <label className="block text-[14px] font-medium text-[#22272B] mb-2">Preferred Life Insurance Companies</label>
+            <div className="flex flex-wrap gap-2">
+              <label className="flex items-center space-x-2 cursor-pointer bg-white border border-blue-400 px-4 py-2 rounded-md">
+                <input
+                  type="checkbox"
+                  name="company"
+                  value="hdfc"
+                  className="accent-[#6290FF] w-4 h-4"
+                />
+                <span className="text-[#22272B] text-[12px] font-medium">HDFC</span>
+              </label>
+              <label className="flex items-center space-x-2 cursor-pointer  bg-white border border-blue-400 px-4 py-2 rounded-md">
+                <input
+                  type="checkbox"
+                  name="company"
+                  value="maxlife"
+                  className="accent-[#6290FF] w-4 h-4"
+                />
+                <span className="text-[#22272B] text-[12px] font-medium">MAX LIFE</span>
+              </label>
+              <label className="flex items-center space-x-2 cursor-pointer  bg-white border border-blue-400 px-4 py-2 rounded-md">
+                <input
+                  type="checkbox"
+                  name="company"
+                  value="birla"
+                  className="accent-[#6290FF] w-4 h-4"
+                />
+                <span className="text-[#22272B] text-[12px] font-medium">BIRLA SUN LIFE</span>
+              </label>
+              <label className="flex items-center space-x-2 cursor-pointer  bg-white border border-blue-400 px-4 py-2 rounded-md">
+                <input
+                  type="checkbox"
+                  name="company"
+                  value="lic"
+                  className="accent-[#6290FF] w-4 h-4"
+                />
+                <span className="text-[#22272B] text-[12px] font-medium">LIC</span>
+              </label>
+            </div>
+          </div>

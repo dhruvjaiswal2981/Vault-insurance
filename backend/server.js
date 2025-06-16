@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 // MongoDB Connection
 mongoose.connect('mongodb+srv://dhruvujjain:Dhruv%402981@cluster0.lvmmjnp.mongodb.net/Vault?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 }).then(() => {
   console.log('✅ Connected to MongoDB (vault)');
 }).catch((err) => {
@@ -33,6 +33,21 @@ const contactSchema = new mongoose.Schema({
 
 const ContactSubmission = mongoose.model('ContactSubmission', contactSchema);
 
+// Life Insurance Lead Schema
+const lifeInsuranceLeadSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  dob: { type: String }, 
+  gender: { type: String, enum: ['male', 'female', 'other'], required: true },
+  email: { type: String, required: true },
+  phone: { type: String, required: true , maxlength: 14 },
+  selected_plan: { type: String, required: true }, 
+  preferred_companies: [{ type: String }], 
+  created_at: { type: Date, default: Date.now }
+});
+
+const LifeInsuranceLead = mongoose.model('LifeInsuranceLead', lifeInsuranceLeadSchema);
+
+
 
 // Health Insurance Lead Schema
 const healthInsuranceLeadSchema = new mongoose.Schema({
@@ -45,6 +60,9 @@ const healthInsuranceLeadSchema = new mongoose.Schema({
   tenure:        { type: Number },     // in years
   eldest_age:    { type: Number },
   pincode:       { type: String, maxlength: 10 },
+  name:          { type: String, required: true },
+  email:         { type: String, required: true },
+  phone:         { type: String, required: true, maxlength: 14 },
   created_at:    { type: Date, default: Date.now }
 });
 
@@ -55,7 +73,7 @@ const HealthInsuranceLead = mongoose.model('HealthInsuranceLead', healthInsuranc
 const businessQuoteSchema = new mongoose.Schema({
   name: { type: String, required: true },
   business_name: { type: String },
-  mobile_number: { type: String, required: true },
+  mobile_number: { type: String, required: true, maxlength: 14 },
   product_type: { type: String, enum: ['retail', 'service', 'manufacturing'], required: true },
   email: { type: String },
   created_at: { type: Date, default: Date.now }
@@ -87,6 +105,27 @@ app.get('/api/contact', async (req, res) => {
   }
 });
 
+// 📥 POST: Life insaurance Create Lead
+app.post('/api/life-insurance-leads', async (req, res) => {
+  try {
+    const lifeLead = new LifeInsuranceLead(req.body);
+    const saved = await lifeLead.save();
+    res.status(201).json({success:true, id: saved.id});
+  } catch (error) {
+    console.error('Error saving lead:', error);
+    res.status(500).json({ success: false, message: 'Failed to save life insaurance lead' });
+  }
+});
+
+// 📤 GET: Life Insaurance Fetch All Leads (optional)
+app.get('/api/life-insurance-leads', async (req, res) => {
+  try {
+    const leads = await LifeInsuranceLead.find().sort({ created_at: -1 });
+    res.json(leads);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve leads' });
+  }
+});
 
 
 // 🚀 POST: Save Health Insurance Lead

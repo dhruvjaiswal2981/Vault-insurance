@@ -14,10 +14,15 @@ import LifeInsurance from './pages/LifeInsurance';
 import HealthInsurance from './pages/HealthInsurance';
 import VehicleInsurance from './pages/VehicleInsurance';
 import BusinessInsurance from './pages/BusinessInsurance';
+import ThankYou from './pages/ThankYou';
 
-import LoginPage from './pages/LoginPage';
-import AdminDashboard from './pages/AdminDashboard';
-import NotFound from './pages/NotFound';
+import LoginPage from './admin/LoginPage';
+import AdminDashboard from './admin/AdminDashboard';
+import NotFound from './admin/NotFound';
+
+import ContactsDashboard from './admin/ContactsDashboard';
+import BusinessQuotesPage from './admin/BusinessQuotesDashboard';
+import HealthLeadsPage from './admin/HealthLeadsDashboard';
 
 
 function MainWebsite() {
@@ -49,11 +54,28 @@ function App() {
       <Route path="/business-insurance" element={<BusinessInsurance />} />
       <Route path="/contact" element={<Contact />} />
       <Route path='/not-found' element={<NotFound/>}/>
+      <Route path='/thank-you' element={<ThankYou/>}/>
+      
+      
+      {/* Admin Routes */}
       <Route path="/admin" element={<LoginPage onLoginSuccess={() => setIsLoggedIn(true)} />} />
-      <Route
-        path="/admin/dashboard"
-        element={isLoggedIn ? <AdminDashboard /> : <Navigate to="/admin" replace />}
-      />
+      
+      {/* Protected Admin Routes */}
+      {isLoggedIn ? (
+        <>
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/contacts" element={<ContactsDashboard />} />
+          <Route path="/admin/health-leads" element={<HealthLeadsPage />} />
+          <Route path="/admin/business-quotes" element={<BusinessQuotesPage />} />
+        </>
+      ) : (
+        <>
+          <Route path="/admin/dashboard" element={<Navigate to="/admin" replace />} />
+          <Route path="/admin/contacts" element={<Navigate to="/admin" replace />} />
+          <Route path="/admin/health-leads" element={<Navigate to="/admin" replace />} />
+          <Route path="/admin/business-quotes" element={<Navigate to="/admin" replace />} />
+        </>
+      )}
     </Routes>
   );
 }

@@ -1,26 +1,17 @@
 import React, { useState } from 'react';
 
 const Footer = () => {
-  const [email, setEmail] = useState('');
-
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    if (email) {
-      alert(`Thank you for subscribing with email: ${email}`);
-      setEmail('');
-    }
-  };
-
   return (
-    <footer className="bg-gradient-to-br from-[#b641ff66] to-[#46b7ff66] py-20 rounded-[30px] mx-4 md:mx-5 mb-3 overflow-hidden">
-      <div className='px-4 md:px-8 mb-10'>
+    <footer className="bg-gradient-to-br from-[#b641ff66] to-[#46b7ff66] py-15 rounded-[30px] mx-3 mb-3 overflow-hidden">
+      
+      <div className="max-w-7xl mx-auto px-4">
+        <div className='mb-10'>
         <img 
               src="/images/Vault Insurance-02.png" 
               alt="Vault Insurance Logo" 
               className="h-8 w-auto"
             />
       </div>
-      <div className="max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           
           {/* Logo and Quick Links */}
@@ -68,12 +59,17 @@ const Footer = () => {
               <br/>latest updates on everything on vault
             </p>
             
-            <form onSubmit={handleNewsletterSubmit} className="mb-8">
+            <form action="https://formsubmit.co/dhruvujjain@gmail.com" method="POST" className="mb-8">
+              {/* Disable CAPTCHA (optional) */}
+              <input type="hidden" name="_captcha" value="false" />
+
+              {/* Optional: Redirect to thank-you page */}
+              <input type="hidden" name="_next" value="http://localhost:5173/thank-you" />
+
               <div className="flex border border-[#2d323d] rounded-lg overflow-hidden">
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name='email'
                   placeholder="enter email ID"
                   className="flex-1 px-4 py-3 text-[#2d313d] bg-transparent outline-none"
                   required
