@@ -18,13 +18,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
     const variants = {
       primary:
-        'bg-gradient-to-r from-[#39b2ff] to-[#c465ea] text-white hover:brightness-110 focus:ring-[#c465ea]',
+        'bg-gradient-to-r from-[#39b2ff] to-[#c465ea] text-white hover:brightness-110 focus:ring-[#c465ea] cursor-pointer',
       secondary:
-        'bg-white text-[#4fb6f8] border border-white hover:bg-gray-50',
+        'bg-white text-[#4fb6f8] border border-white hover:bg-gray-50 cursor-pointer',
       outline:
-        'border-2 border-[#3db1ff] text-transparent bg-clip-text bg-gradient-to-r from-[#3db1ff] to-[#c366eb] hover:bg-white hover:text-[#3db1ff] focus:ring-[#3db1ff]',
+        'border-2 border-[#3db1ff] text-transparent bg-clip-text bg-gradient-to-r from-[#3db1ff] to-[#c366eb] hover:bg-white hover:text-[#3db1ff] focus:ring-[#3db1ff] cursor-pointer',
       ghost:
-        'bg-transparent text-white border-2 border-transparent hover:border-white',
+        'bg-transparent text-white border-2 border-transparent hover:border-white cursor-pointer',
     };
 
     const sizes = {
@@ -104,7 +104,7 @@ const Contact = () => {
       
       {/* Left Side - Form */}
       <div className="z-10">
-        <h2 className="text-4xl font-semibold text-[#22272b] mb-10">Contact us</h2>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#22272b] mb-10">Contact us</h2>
         <form onSubmit={handleSubmit} className="space-y-8">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

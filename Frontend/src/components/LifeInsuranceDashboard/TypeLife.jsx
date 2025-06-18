@@ -11,7 +11,7 @@ const TypeLife = () => {
                         flex flex-col items-center justify-center text-center"
             >
                 <div className="mb-16 px-4 max-w-4xl">
-                <h2 className="text-3xl md:text-4xl font-semibold text-[#202B32] mb-10">
+                <h2 className="text-[28px] md:text-[46px] font-semibold text-[#202B32] mb-10">
                     Understand the Types of Life Insurance
                 </h2>
                 <p className="text-[#202B3299] text-[14px] md:text-[15px] leading-relaxed font-semibold">

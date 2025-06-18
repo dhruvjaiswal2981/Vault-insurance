@@ -13,10 +13,10 @@ const Button = ({
   const baseClasses = 'font-medium rounded-xl transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 inline-flex items-center justify-center';
 
   const variants = {
-    primary: 'bg-gradient-to-r from-[#39b2ff] to-[#c465ea] text-white hover:opacity-90',
-    secondary: 'bg-white text-[#3db1ff] hover:bg-gray-100',
-    outline: 'border-2 border-solid border-white text-white hover:bg-white hover:text-[#3db1ff]',
-    ghost: 'bg-transparent text-white hover:bg-white/10'
+    primary: 'bg-gradient-to-r from-[#39b2ff] to-[#c465ea] text-white hover:opacity-90 cursor-pointer',
+    secondary: 'bg-white text-[#3db1ff] hover:bg-gray-100 cursor-pointer',
+    outline: 'border-2 border-solid border-white text-white hover:bg-white hover:text-[#3db1ff] cursor-pointer',
+    ghost: 'bg-transparent text-white hover:bg-white/10 cursor-pointer'
   };
 
   const sizes = {
@@ -44,22 +44,24 @@ const InsuranceGrid = ({ items }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6 mb-6">
         {items.slice(0, 3).map((item, i) => (
           <div key={i} className="flex items-center justify-center space-x-4">
-            <div className="w-10 h-10 bg-white/30  flex-shrink-0"></div>
-            <span className="text-white text-[15px]">{item}</span>
+            <img src={item.image} alt={item.title} className="w-10 h-10 object-contain" />
+            <span className="text-white text-[15px]">{item.title}</span>
           </div>
         ))}
       </div>
+
       {items.length > 3 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 px-20 py-5 gap-y-6 justify-center items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 px-10 md:px-20 py-5 gap-y-6 justify-center items-center">
           {items.slice(3).map((item, i) => (
             <div key={i + 3} className="flex items-center justify-center space-x-4">
-              <div className="w-10 h-10 bg-white/30  flex-shrink-0"></div>
-              <span className="text-white text-[15px]">{item}</span>
+              <img src={item.image} alt={item.title} className="w-10 h-10 object-contain" />
+              <span className="text-white text-[15px]">{item.title}</span>
             </div>
           ))}
         </div>
       )}
     </div>
+
   );
 };
 
@@ -78,12 +80,28 @@ const InsuranceSections = () => {
   };
 
   const businessInsuranceItems = [
-    "Business Insurance",
-    "Education Insurance",
-    "Construction Insurance",
-    "Hotel Insurance",
-    "Marine & Cargo Insurance"
-  ];
+  {
+    title: "Business Insurance",
+    image: "/images/business-insurance.png",
+  },
+  {
+    title: "Education Insurance",
+    image: "/images/education-insurance.png",
+  },
+  {
+    title: "Construction Insurance",
+    image: "/images/construction-insurance.png",
+  },
+  {
+    title: "Hotel Insurance",
+    image: "/images/hotel-insurance.png",
+  },
+  {
+    title: "Marine & Cargo Insurance",
+    image: "/images/marine-cargo-insurance.png",
+  },
+];
+
 
   return (
     <>

@@ -29,8 +29,8 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full bg-white py-5 px-1 mt-6 z-50">
-      <div className="flex items-center w-full px-5 justify-between">
+    <header className="w-full bg-white py-5 px-1 z-50">
+      <div className="flex items-center w-full md:justify-around justify-between px-5">
         {/* Logo */}
         <div className="flex items-center">
           <img
@@ -61,12 +61,12 @@ const Header = () => {
         <div className="hidden md:flex items-center justify-center space-x-4">
           <button 
           onClick={handleGetQuote}
-          className="w-[170px] text-lg font-medium text-blue-600 px-6 py-2 border border-blue-600 rounded-lg transition hover:bg-blue-50 whitespace-nowrap">
+          className="w-[170px] text-sm font-medium text-blue-600 px-6 py-2 border border-blue-600 rounded-lg transition hover:bg-blue-50 whitespace-nowrap cursor-pointer">
             Get Free Quote
           </button>
           <button
             onClick={handleClaimsClick}
-            className="w-[170px]  text-lg font-medium text-white bg-[#4568C7] px-6 py-2 rounded-lg transition hover:bg-blue-700 flex items-center justify-center gap-2"
+            className="w-[170px] text-sm font-medium text-white bg-[#4568C7] px-6 py-2 rounded-lg transition hover:bg-blue-700 flex items-center justify-center gap-2 cursor-pointer"
           >
             Claims
             <svg
@@ -103,13 +103,13 @@ const Header = () => {
 
       {/* Mobile Navigation Menu */}
       {menuOpen && (
-        <div className="md:hidden bg-white shadow-lg rounded-lg mt-2 mx-4">
+        <div className="md:hidden bg-white shadow-lg rounded-lg mt-6 mx-4">
           <nav className="flex flex-col">
             {navLinks.map(({ name, path }) => (
               <a
                 key={name}
                 href={path}
-                className={`px-4 py-3 text-lg font-medium transition-colors ${
+                className={`px-4 py-4 text-lg font-medium transition-colors ${
                   isActive(path)
                     ? "text-blue-600 bg-blue-50 border-l-4 border-blue-600"
                     : "text-gray-700 hover:text-blue-600 hover:bg-blue-50"
@@ -119,15 +119,15 @@ const Header = () => {
                 {name}
               </a>
             ))}
-            <div className="border-t border-gray-200 px-4 py-3 flex flex-col space-y-2">
+            <div className="border-t border-gray-200 px-4 py-4 flex flex-col space-y-2">
               <button 
               onClick={handleGetQuote}
-              className="w-full text-center text-lg font-medium text-[#4568C7] px-4 py-2 border border-[#4568C7] rounded-lg transition hover:bg-blue-50">
+              className="w-full text-center text-sm font-medium text-[#4568C7] px-4 py-4 border border-[#4568C7] rounded-lg transition hover:bg-blue-50">
                 Get Free Quote
               </button>
               <button
                 onClick={handleClaimsClick}
-                className="w-full text-center text-lg font-medium text-white bg-[#4568C7] px-4 py-2 rounded-lg transition hover:bg-blue-700"
+                className="w-full text-center text-sm font-medium text-white bg-[#4568C7] px-4 py-4 rounded-lg transition hover:bg-blue-700"
               >
                 Claims
               </button>

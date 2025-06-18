@@ -23,18 +23,18 @@ const About = () => {
             </h2>
             
             <div className="space-y-4 md:space-y-6">
-              <p className="text-base md:text-[14px] text-[#22272bcc] leading-relaxed">
-                <span className="font-semibold text-[#22272B] ">Our Beginning</span> <br/>
+              <p className="font-medium text-base md:text-[14px] text-[rgba(34,39,43,0.8)] leading-relaxed">
+                <span className="md:text-[15px] font-semibold text-[#22272B] mb-2">Our Beginning</span> <br/>
                 We started in 2002 to teach people what insurance is and why it matters. What began as a small agency with a dream of making insurance accessible to everyone has grown into a trusted partner for thousands of families and businesses across India—and we’ve earned over 100 awards for our impact in the industry.
               </p>
 
-              <p className="text-base md:text-[14px] text-[#22272bcc] leading-relaxed">
-                <span className="font-semibold text-[#22272B]">How We Work</span> <br />
+              <p className="font-medium text-base md:text-[14px] text-[rgba(34,39,43,0.8)] leading-relaxed">
+                <span className="font-semibold md:text-[15px] text-[#22272B]">How We Work</span> <br />
                 We treat you with care—listening to your needs like a mother cares for her child. Then we guide you to the right plan in clear, simple language, with no confusing jargon or pressure.
               </p>
 
-              <p className="text-base md:text-[14px] text-[#22272bcc] leading-relaxed">
-                <span className="font-semibold text-[#22272B]">What We Offer</span> <br />
+              <p className="font-medium text-base md:text-[14px] text-[rgba(34,39,43,0.8)] leading-relaxed">
+                <span className="font-semibold md:text-[15px] text-[#22272B]">What We Offer</span> <br />
                 We protect what matters most to you—yourself, your children, your partner, your parents, your home, and your business. More than an insurance agency, we’re your guardian—keeping you safe and giving you peace of mind.
               </p>
             </div>

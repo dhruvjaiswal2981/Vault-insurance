@@ -137,7 +137,7 @@ const Statistics = () => {
 <div className="w-full px-4 md:px-6 lg:px-0 mb-12 md:mb-20 mt-12 ml-6 md:mt-30">
   <div className="bg-white rounded-l-[20px] md:rounded-l-[30px] p-4 sm:p-6 md:p-20 relative">
 
-    <h2 className="text-4xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#22272b] mb-15 sm:mb-8 md:mb-20 text-left">
+    <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#22272b] mb-15 sm:mb-8 md:mb-20 text-left">
       Our Insurance Partners
     </h2>
 
@@ -246,10 +246,10 @@ const Statistics = () => {
           
   {/* Testimonials Section */}
     <div className="mt-12 md:mt-30 px-4">
-      <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 text-left md:px-10">
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 text-left md:px-10">
         Stories from Our Vaulters
       </h2>
-      <p className="text-[10px] md:text-[14px] text-white/90 mb-10 md:mb-12 text-left md:px-10">
+      <p className="text-[14px] md:text-[15px] text-white/90 mb-10 md:mb-12 text-left md:px-10">
         Join 1000s of Happy Souls Who Have Trusted Vault — Become a Vaulter Today!
       </p>
 
@@ -270,12 +270,12 @@ const Statistics = () => {
         className="mb-10 swiper-container-with-custom-pagination"
       >
         {testimonials.map((testimonial) => (
-          <SwiperSlide key={testimonial.id}>
-            <div className="bg-white rounded-[24px] p-8 h-full shadow-md">
+          <SwiperSlide key={testimonial.id} className="flex h-full">
+            <div className="bg-white rounded-[24px] p-8 shadow-md w-full flex flex-col justify-between min-h-[230px] md:min-h-[250px]">
               <p className="text-[14px] md:text-[18px] font-bold text-[#4788dc] mb-8 leading-relaxed">
                 “{testimonial.quote}”
               </p>
-              <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-4 mt-auto">
                 <img
                   src={testimonial.image}
                   alt={testimonial.name}
@@ -296,7 +296,7 @@ const Statistics = () => {
       {/* Corporate Clients Section */}
       <section className="py-12 md:py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-6 text-center">
-          <h2 className="text-4xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold text-[#22272b] mb-8 md:mb-12 lg:mb-16">Our Corporate Insurance Clients</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#22272b] mb-8 md:mb-12 lg:mb-16">Our Corporate Insurance Clients</h2>
           
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 lg:gap-12">
             <img src="/images/NCC-logo.png" alt="NCC" className="h-16 md:h-20 lg:h-24 w-auto" />

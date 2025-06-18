@@ -195,7 +195,7 @@ const SerachBarBusiness = () => {
             <input
               type="text"
               placeholder="Search &quot;General Liability Insurance&quot;"
-              className="w-auto md:w-[380px] h-[60px] px-6 pl-15 rounded-[10px] bg-white text-gray-700 shadow-[10px_10px_40px_0px_rgba(26,129,255,0.10)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-auto md:w-[380px] h-[60px] px-6 pl-15 rounded-[10px] bg-white text-gray-700 shadow-[10px_10px_40px_0px_rgba(26,129,255,0.10)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent cursor-pointer"
               value={searchTerm}
               onChange={handleSearchChange}
             />

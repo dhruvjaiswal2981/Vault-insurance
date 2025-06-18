@@ -13,11 +13,11 @@ const Button = ({
   const baseClasses = 'font-medium rounded-xl transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 inline-flex items-center justify-center';
 
   const variants = {
-    primary: 'bg-gradient-to-r from-[#39b2ff] to-[#c465ea] text-white hover:opacity-90',
-    secondary: 'bg-white text-[#3db1ff] hover:bg-gray-100',
-    outline: 'border-2 border-white text-white hover:bg-white hover:text-[#3db1ff]',
-    ghost: 'bg-transparent text-white hover:bg-white/10',
-    desk: "bg-[#5788E9] text-white hover:opacity-90"
+    primary: 'bg-gradient-to-r from-[#39b2ff] to-[#c465ea] text-white hover:opacity-90 cursor-pointer',
+    secondary: 'bg-white text-[#3db1ff] hover:bg-gray-100 cursor-pointer',
+    outline: 'border-2 border-white text-white hover:bg-white hover:text-[#3db1ff] cursor-pointer',
+    ghost: 'bg-transparent text-white hover:bg-white/10 cursor-pointer',
+    desk: "bg-[#5788E9] text-white hover:opacity-90 cursor-pointer"
   };
 
   const sizes = {
@@ -92,7 +92,7 @@ const CoreValuesSection = () => {
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-[#22272B] mb-4 md:mb-6">Our Core Values</h2>
         <p className="text-[14px] md:text-[15px] text-[#22272bcc] mb-12 md:mb-16 max-w-3xl mx-auto leading-relaxed">
           At Vault Insurance, we protect more than what you own — we protect 
-          <br/>what you love, what you’ve built, and all you hope to become.
+          what you love, what you’ve built, and all you hope to become.
         </p>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 mb-12 md:mb-16 md:h-[286px]">
@@ -101,10 +101,10 @@ const CoreValuesSection = () => {
               key={index}
               className={`${value.bgColor} ${value.shadowColor} rounded-[30px] p-6 md:p-8 text-center transition-transform duration-300 hover:scale-105`}
             >
-              <h3 className="text-[24px] md:text-[24px] font-semibold text-white mb-4 md:mb-6 capitalize">
+              <h2 className="text-[20px] md:text-[24px] font-semibold text-white mb-4 md:mb-6 capitalize">
                 {value.title}
-              </h3>
-              <p className="text-white text-base md:text-[16zpx] leading-relaxed md:leading-loose">
+              </h2>
+              <p className="text-white text-[14px] md:text-[15px] leading-relaxed md:leading-loose">
                 {value.description}
               </p>
             </div>
