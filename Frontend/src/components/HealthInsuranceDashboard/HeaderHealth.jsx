@@ -21,6 +21,10 @@ const HeaderHealth = () => {
     navigate("/contact")
   };
 
+  const handleRedirect = () => {
+    navigate("/")
+  }
+
 
   const handleClaimsClick = () => {
     setShowClaimsInfo(!showClaimsInfo);
@@ -33,9 +37,10 @@ const HeaderHealth = () => {
         {/* Logo */}
         <div className="flex items-center">
           <img
+            onClick={handleRedirect}
             src="/images/Vault Insurance-03.png"
             alt="Vault Insurance Logo"
-            className="h-8 w-auto"
+            className="h-8 w-auto cursor-pointer"
           />
         </div>
 

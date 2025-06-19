@@ -28,15 +28,20 @@ const HeaderLife = () => {
     setMenuOpen(false); 
   };
 
+  const handleRedirect = () => {
+    navigate("/")
+  }
+
   return (
     <header className="w-full bg-white py-5 px-1 z-50 bg-[linear-gradient(250deg,#24BDED_0%,#47B7FF_100%)]  ">
       <div className="flex items-center w-full md:justify-around justify-between px-5">
         {/* Logo */}
         <div className="flex items-center">
           <img
+            onClick={handleRedirect}
             src="/images/Vault Insurance-03.png"
             alt="Vault Insurance Logo"
-            className="h-8 w-auto"
+            className="h-8 w-auto cursor-pointer"
           />
         </div>
 

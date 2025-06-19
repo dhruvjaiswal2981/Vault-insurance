@@ -24,7 +24,7 @@ const AdminDashboard = () => {
         const [contactsRes, businessRes, healthRes, lifeRes] = await Promise.all([
           axios.get('https://vault-insurance.onrender.com/api/contact'),
           axios.get('https://vault-insurance.onrender.com/api/business-quotes'),
-          axios.get('https://vault-insurance.onrender.com/api/health-insurance-leads'),
+          axios.get('http://localhost:4000/api/health-insurance-leads'),
           getLifeInsuranceLeads()
         ]);
 

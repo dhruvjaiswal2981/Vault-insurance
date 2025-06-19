@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation ,useNavigate} from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showClaimsInfo, setShowClaimsInfo] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navLinks = [
     { name: "home", path: "/" },
@@ -28,12 +29,17 @@ const Header = () => {
     setMenuOpen(false); 
   };
 
+  const handleRedirect = ()  => {
+    navigate("/")
+  }
+
   return (
     <header className="w-full bg-white py-5 px-1 z-50">
       <div className="flex items-center w-full md:justify-around justify-between px-5">
         {/* Logo */}
         <div className="flex items-center">
           <img
+            onClick={handleRedirect}
             src="/images/Vault Insurance-01.png"
             alt="Vault Insurance Logo"
             className="h-8 w-auto"

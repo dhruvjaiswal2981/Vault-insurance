@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-    baseURL: 'https://vault-insurance.onrender.com/api', // Your backend URL https://vault-insurance.onrender.com
+    baseURL: 'http://localhost:4000/api', // Your backend URL https://vault-insurance.onrender.com
     timeout: 10000, // Request timeout
 });
 
